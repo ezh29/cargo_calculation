@@ -125,8 +125,8 @@ function box_init() {
     for (var i = 0; i < box.length; i++) {
         if(box[i][8] != "0"){
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
-            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개,' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px;">설정 최대단수 ' + box[i][8] + '단</span>' +
+            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;">설정 최대단수 ' + box[i][8] + '단</span>' +
             '</li>');
         }else {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
