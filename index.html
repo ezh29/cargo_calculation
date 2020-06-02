@@ -13,11 +13,16 @@
     <div class="" style="padding: 20px; overflow: hidden; min-width: 1200px;">
 
         <div id="input_area" style="width: 500px;float: left; padding: 0 20px">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="panel-title">적재함 선택<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            <div class="panel panel-default">
+                <div class="panel-heading" id="togle_btn3">
+                    <h3 class="panel-title" id="panel-title">전체 접기<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" style="float: right; cursor: pointer;"></span></h3>
                 </div>
-                <div class="panel-body">
+            </div>
+            <div class="panel panel-primary all_toggle_body">
+                <div class="panel-heading" id="togle_btn">
+                    <h3 class="panel-title" id="panel-title">적재함 선택<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" style="float: right; cursor: pointer;"></span></h3>
+                </div>
+                <div class="panel-body" id="togle_body">
                     <div class="radio">
                         <label>
                             <input type="radio" name="container_size" id="optionsRadios1" value="option1" checked>
@@ -59,37 +64,49 @@
                     <div class="well" style="text-align: center; margin-bottom: 0;"> 적재함 사이즈 <span class="container_info" style="font-weight: bold;"></span></div>
                 </div>
             </div>
+            <div class="panel panel-primary all_toggle_body">
+                <div class="panel-heading" id="togle_btn2">
+                    <h3 class="panel-title" id="panel-title">박스 추가<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" style="float: right; cursor: pointer;"></span></h3>
+                </div>
+                <div class="panel-body" id="togle_body2">
+                    <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
+                        <div class="form-group">
+                            <span style="margin-right: 10px;">박스명 </span>
+                            <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
+                            <span style="margin-right: 10px;">최대단수 설정 </span>
+                            <input style="width: 50px; margin-right:5px" type="text" class="form-control" id="box_val_6" placeholder="0"> 단
+                        </div>
+                    </form>
+                    <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
+
+                        <div class="form-group">
+                            <span style="margin-right: 10px;">박스사이즈 </span>
+                            <input style="width: 50px" type="text" class="form-control" id="box_val_2" placeholder="장"> X
+                            <input style="width: 50px" type="text" class="form-control" id="box_val_3" placeholder="폭"> X
+                            <input style="width: 50px" type="text" class="form-control" id="box_val_4" placeholder="고">
+                            <span style="margin-left:  10px;">수량 </span>
+                            <input style="width: 50px; margin-right:5px" type="text" class="form-control" id="box_val_5" placeholder="0"> 개
+                        </div>
+                    </form>
+                    <div style="overflow: hidden">
+                        <button type="button" onclick="addBoxValue();" class="btn btn-default btn-lg btn-block" style="width: 100%;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 박스 추가</button>
+                        <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
+                        <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
+                    </div>
+                    <div class="checkbox">
+                        <label class="btn btn-default btn-block">
+                            <input type="checkbox" value="" name="box_abxolute">
+                            박스 분할하여 추가하기<br/>
+                            <span style="font-size: 12px;    color: #999;">(박스를 묶음별로 개별 추가합니다. 각각 드래그가 가능합니다.)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="panel panel-info box_list">
                 <div class="panel-heading">
                     <h3 class="panel-title" id="panel-title">박스 목록<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
-                        <div class="form-group">
-                           <span style="margin-right: 10px;">박스명 </span>
-                            <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
-                        <span style="margin-right: 10px;">최대단수 설정 </span>
-                            <input style="width: 50px; margin-right:10px" type="text" class="form-control" id="box_val_6" placeholder="0"> 단
-                        </div>
-                    </form>
-                    <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
-                        
-                        <div class="form-group">
-                           <span style="margin-right: 10px;">박스사이즈 </span>
-                            <input style="width: 50px" type="text" class="form-control" id="box_val_2" placeholder="장"> X
-                            <input style="width: 50px" type="text" class="form-control" id="box_val_3" placeholder="폭"> X
-                            <input style="width: 50px" type="text" class="form-control" id="box_val_4" placeholder="고">
-                            <span style="margin-left:  10px;">수량 </span>
-                            <input style="width: 50px" type="text" class="form-control" id="box_val_5" placeholder="0"> 개
-                        </div>
-                    </form>
-                    <div style="overflow: hidden">
-                        <button type="button" onclick="addBoxValue();" class="btn btn-default btn-lg btn-block" style="width: 100%;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 박스 추가</button>
-                    <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
-                    <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
-                    </div>
-                    
-                    <hr />
                     <p style="text-align: center;">박스를 드래그하여 순서를 바꿀 수 있습니다.</p>
                     <ul id="boxlist">
                         <li class="ui-state-default">
@@ -101,8 +118,11 @@
             </div>
 
         </div>
-
-        <div id="container_area" style="float: left;"></div>
+        <div id="container_area" style="float: left;">
+            <div class="" style="text-align: center; margin-bottom: 0; color: #666;"> 적재함 사이즈
+                <span class="container_info" style="font-weight: bold;"></span>
+            </div>
+        </div>
     </div>
 
 

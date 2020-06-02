@@ -309,15 +309,41 @@ function boxincontainer() {
             break;
         }
         console.log('box', box);
-        //묶음 생성
-        for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
-        }
-        //나머지 박스 생성
-        if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
+        // 박스 분할하여 추가하기 체크여부 확인
+        if ($("input:checkbox[name=box_abxolute]").is(":checked") == true) { //박스 분할하기 체크되어있으면
+            
+            //단 묶음수 만큼 배열 추가, 단 묶음수 1로 초기화
+            for (var k = 0; k < box[i][6]; j++) { //단 묶음수길이만큼 돌림
+                box[i][6] = 1; //단 묶음수 1 초기화
+                box[i][7] = 0; //묶음 나머지 0 초기화
+                box.push(box[i]);
+            }
+        } else { //박스 분할하기 체크되어있지 않으면
+            //묶음 생성
+            for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            }
+            //나머지 박스 생성
+            if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
 
+            }
         }
 
     }
 }
+
+
+//적재함 토글
+$("#togle_btn").on("click", function () {
+    $("#togle_body").toggle(300);
+});
+//박스추가 토글
+$("#togle_btn2").on("click", function () {
+    $("#togle_body2").toggle(300);
+});
+
+//전체 토글
+$("#togle_btn3").on("click", function () {
+    $(".all_toggle_body").toggle(300);
+});
