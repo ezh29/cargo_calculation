@@ -25,15 +25,15 @@
                 <div class="panel-body" id="togle_body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option1" checked>
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option1" >
                             1톤 트럭 260*160*160
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option2" checked>
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option2" >
                             2.5톤 트럭 420*180*180
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option3" checked>
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option3" >
                             5톤 트럭 620*230*230
                         </label><br />
                         <label>
@@ -41,7 +41,7 @@
                             11톤 트럭 960*240*240
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option5" checked>
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option5" >
                             25톤 트럭 1020 * 240 * 240
                         </label>
                     </div>
@@ -104,7 +104,7 @@
             </div>
             <div class="panel panel-info box_list">
                 <div class="panel-heading">
-                    <h3 class="panel-title" id="panel-title">박스 목록<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+                    <h3 class="panel-title" id="panel-title">박스 목록<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a><span class="glyphicon glyphicon-trash" aria-hidden="true" style="float: right;cursor: pointer;" onclick="all_delet_boxlist();"></span></h3>
                 </div>
                 <div class="panel-body">
                     <p style="text-align: center;">박스를 드래그하여 순서를 바꿀 수 있습니다.</p>
@@ -131,7 +131,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="custom.js?ver=1.4"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="touch-punch.min.js"></script>
 
 <script>
     $(function() {
