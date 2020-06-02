@@ -43,6 +43,6 @@
         }
 
         /*박스리스트*/
-#boxlist li { border-left: 5px solid #82949a;}
+#boxlist li { border-left: 5px solid #82949a; cursor: move;}
 #boxlist span {cursor: pointer; font-size: 20px; float: right;}
 #boxlist strong {display: inline-block; margin: 0 10px;}
