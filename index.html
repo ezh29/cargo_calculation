@@ -66,16 +66,16 @@
                 <div class="panel-body">
                     <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
                         <div class="form-group">
-                            <span style="margin-right: 10px;">박스명 </span>
+                           <span style="margin-right: 10px;">박스명 </span>
                             <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
-                            <span style="margin-right: 10px;">최대단수 설정 </span>
+                        <span style="margin-right: 10px;">최대단수 설정 </span>
                             <input style="width: 50px; margin-right:10px" type="text" class="form-control" id="box_val_6" placeholder="0"> 단
                         </div>
                     </form>
                     <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
-
+                        
                         <div class="form-group">
-                            <span style="margin-right: 10px;">박스사이즈 </span>
+                           <span style="margin-right: 10px;">박스사이즈 </span>
                             <input style="width: 50px" type="text" class="form-control" id="box_val_2" placeholder="장"> X
                             <input style="width: 50px" type="text" class="form-control" id="box_val_3" placeholder="폭"> X
                             <input style="width: 50px" type="text" class="form-control" id="box_val_4" placeholder="고">
@@ -85,10 +85,10 @@
                     </form>
                     <div style="overflow: hidden">
                         <button type="button" onclick="addBoxValue();" class="btn btn-default btn-lg btn-block" style="width: 100%;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 박스 추가</button>
-                        <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
-                        <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
+                    <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
+                    <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
                     </div>
-
+                    
                     <hr />
                     <p style="text-align: center;">박스를 드래그하여 순서를 바꿀 수 있습니다.</p>
                     <ul id="boxlist">
@@ -107,20 +107,19 @@
 
 
 </body>
-<!-- jQuery / jQuery UI -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- jQuery Touch Punch - Enable Touch Drag and Drop -->
-<script src="jquery.touch-punch.min"></script>
-
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="custom.js?ver=1.4"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <!-- jQuery Touch Punch - Enable Touch Drag and Drop -->
+  <script src="jquery.touch-punch.min.js"></script>
+
 <script>
     $(document).ready(function() {
-      
+      $("#container_area").shapeshift({
+        minColumns: 3
+      });
     })
-
-</script>
+  </script>
 
 </html>
