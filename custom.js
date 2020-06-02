@@ -123,12 +123,14 @@ function addBoxValue() {
     new_box[5] = 1; //기본값 설정
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
-    new_box[8] = Number($('#box_val_6').val()); //최대단수
+    new_box[8] = Number($('#box_val_6').val()); //설정 최대단수
 
 
-
-
-    if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
+    if (new_box[4] < new_box[8]) {
+        //수량보다 설정 최대 단수가 많을때
+        alert(new_box[0] + " 박스는 " + new_box[4] + "단 이상 쌓을 수 없습니다. (설정 최대 단수 " + new_box[8] + "단)");
+        
+    }else if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
     } else {
         box.push(new_box);
@@ -250,8 +252,8 @@ function boxincontainer() {
         console.log("dan", dan);
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
             if (box[i][4] < box[i][8]) {
-                //최대 단수보다 최대 단수가 많을때
-                alert(box[i][0] + " 박스는 " + box[i][4] + "단 이상 쌓을 수 없습니다. 입력 최대 단수 " + box[i][4] + "단");
+                //수량보다 설정 최대 단수가 많을때
+                alert(box[i][0] + " 박스는 " + box[i][4] + "단 이상 쌓을 수 없습니다. (설정 최대 단수 " + box[i][8] + "단)");
             } else if (box[i][8] != "0") {
                 dan = box[i][8];
                 //최대단수가 0이 아니면 단수 최대단수로 강제 입력
@@ -272,6 +274,7 @@ function boxincontainer() {
             }
         } else { //1단 이하로 쌓아질떄 = 적재불가
             alert(box[i][0] + " 박스는 컨테이너 높이를 초과하는 박스입니다.");
+            break;
         }
         console.log('box', box);
         //묶음 생성
