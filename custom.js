@@ -6,7 +6,7 @@ $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
 
 var box = [];
 var box_leng = box.length;
-//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스
+//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스, [9]최대단수
 //box[0] = ['가나무역', 110, 110, 103, 12, 0];
 //box[1] = ['영코퍼', 110, 150, 100, 3, 0];
 //box[2] = ['이베이', 112, 110, 110, 3, 0];
@@ -90,7 +90,7 @@ $("#box_val_4").keyup(function () {
 function addBoxValue() {
 
     var new_box = [];
-    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스
+    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스,[9]최대단수
     new_box[0] = $('#box_val_1').val(); //박스이름
     new_box[1] = Number($('#box_val_2').val()); //장
     new_box[2] = Number($('#box_val_3').val()); //폭
@@ -99,6 +99,8 @@ function addBoxValue() {
     new_box[5] = 1; //기본값 설정
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
+    new_box[8] = Number($('#box_val_6').val()); //최대단수
+
 
 
 
@@ -121,10 +123,18 @@ function addBoxValue() {
 function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
-        $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+        if(box[i][8] != "0"){
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개,' +
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px;">설정 최대단수 ' + box[i][8] + '단</span>' +
+            '</li>');
+        }else {
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
             box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
             '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
-            '</li>')
+            '</li>');
+        }
+        
     }
 //박스리스트 삭제 다시 걸어줌
 box_list_delet();
@@ -214,6 +224,14 @@ function boxincontainer() {
         var dan = parseInt(container[2] / box[i][3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
         console.log("dan", dan);
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
+            if(box[i][4]<box[i][8]){
+                //최대 단수보다 최대 단수가 많을때
+                alert(box[i][0]+ " 박스는 "+box[i][4]+"단 이상 쌓을 수 없습니다. 입력 최대 단수 "+box[i][4]+"단");
+            }else if (box[i][8] != "0"){
+                dan = box[i][8]; 
+                //최대단수가 0이 아니면 단수 최대단수로 강제 입력
+            }
+            
             if (box[i][4] > dan) { //최대 단수보다 수량이 많을때
                 box[i][6] = parseInt(box[i][4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
                 console.log("묶음 수", box[i][6]);
@@ -233,11 +251,11 @@ function boxincontainer() {
 console.log('box',box);
         //묶음 생성
         for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
         }
         //나머지 박스 생성
         if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
+            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
 
         }
 

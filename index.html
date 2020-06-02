@@ -32,9 +32,9 @@
                         <form class="form-inline" style="display: inline-block">
                             <div class="form-group">
                                 <input style="width: 50px; margin-left: 10px;" type="text" class="form-control" id="container_size_1" placeholder="장"> X
-                         
+
                                 <input style="width: 50px" type="text" class="form-control" id="container_size_2" placeholder="폭"> X
-                     
+
                                 <input style="width: 50px" type="text" class="form-control" id="container_size_3" placeholder="고"> cm
                             </div>
                         </form>
@@ -48,9 +48,17 @@
                 </div>
                 <div class="panel-body">
                     <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
-                        <div class="form-group">
-                            <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="박스명">
+                       <span style="margin-right: 10px;">박스명 </span>
+                        <div class="form-group"> 
+                            <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
                         </div>
+                        <span style="margin-right: 10px;">최대단수 설정 </span>
+                        <div class="form-group">
+                            <input style="width: 50px; margin-right:10px" type="text" class="form-control" id="box_val_6" placeholder="0"> 단
+                        </div>
+                    </form>
+                    <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
+                       <span style="margin-right: 10px;">박스사이즈 </span>
                         <div class="form-group">
                             <input style="width: 50px" type="text" class="form-control" id="box_val_2" placeholder="장"> X
                         </div>
@@ -60,13 +68,14 @@
                         <div class="form-group">
                             <input style="width: 50px" type="text" class="form-control" id="box_val_4" placeholder="고">
                         </div>
+                        <span style="margin-left:  10px;">수량 </span>
                         <div class="form-group" style="margin-left: 10px;">
-                            <input style="width: 50px" type="text" class="form-control" id="box_val_5" placeholder="수량"> 개
+                            <input style="width: 50px" type="text" class="form-control" id="box_val_5" placeholder="0"> 개
                         </div>
                     </form>
                     <button type="button" onclick="addBoxValue();" class="btn btn-default btn-lg btn-block" style="width: 100%;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 박스 추가</button>
                     <button type="button" onclick="start_bubbleSort();" class="btn btn-default btn-block" style="width: 100%; margin-top: 10px;"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> 작은순으로 정렬</button>
-                    <hr/>
+                    <hr />
                     <p style="text-align: center;">박스를 드래그하여 순서를 바꿀 수 있습니다.</p>
                     <ul id="boxlist">
                         <li class="ui-state-default">
