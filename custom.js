@@ -2,7 +2,7 @@
 var color = ['4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B', '4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B'];
 
 var container = [1020, 240, 240]; //기본 사이즈 25톤
-$('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+$('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
 
 var box = [];
 var box_leng = box.length;
@@ -19,11 +19,35 @@ var box_leng = box.length;
 $("input:radio[name=container_size]").click(function () {
     var radioVal = $('input[name="container_size"]:checked').val();
     switch (radioVal) {
-        case "option1": //25톤 트럭 1020 * 240 * 240
+        case "option1": //1톤 트럭 260*160*160
+            container = [260, 160, 160];
+            $('#container').css("height", container[0]);
+            $('#container').css("width", container[1]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            break;
+        case "option2": //2.5톤 트럭 420*180*180
+            container = [420, 180, 180];
+            $('#container').css("height", container[0]);
+            $('#container').css("width", container[1]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            break;
+        case "option3": //5톤 트럭 620*230*230
+            container = [620, 230, 230];
+            $('#container').css("height", container[0]);
+            $('#container').css("width", container[1]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            break;
+        case "option4": //11톤 트럭  960*240*240
+            container = [960, 240, 240];
+            $('#container').css("height", container[0]);
+            $('#container').css("width", container[1]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            break;
+        case "option5": //25톤 트럭 1020 * 240 * 240
             container = [1020, 240, 240];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "size_input":
             container[0] = Number($("#container_size_1").val());
@@ -31,7 +55,7 @@ $("input:radio[name=container_size]").click(function () {
             container[2] = Number($("#container_size_3").val());
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             //console.log(container);
 
             $("#container_size_1").keyup(function () { //장
@@ -39,21 +63,21 @@ $("input:radio[name=container_size]").click(function () {
                 //console.log("val", val);
                 container[0] = Number(val);
                 $('#container').css("height", val);
-                $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             });
             $("#container_size_2").keyup(function () { //폭
                 var val = $(this).val();
                 //console.log("val", val);
                 container[1] = Number(val);
                 $('#container').css("width", val);
-                $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             });
             $("#container_size_3").keyup(function () { //고
                 var val = $(this).val();
                 //console.log("val", val);
                 container[2] = Number(val);
-                console.log('container',container);
-                $('.container_info').html(container[0]+' * '+container[1]+' * '+container[2]);
+                console.log('container', container);
+                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             });
             break;
         default:
@@ -104,8 +128,8 @@ function addBoxValue() {
 
 
 
-    if (new_box[0] == "" || new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
-        alert('입력값을 다 입력해주세요.');
+    if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
+        alert('장폭고, 수량을 다 입력해주세요.');
     } else {
         box.push(new_box);
         //console.log("box", box);
@@ -123,24 +147,25 @@ function addBoxValue() {
 function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
-        if(box[i][8] != "0"){
+        if (box[i][8] != "0") {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
-            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;">설정 최대단수 ' + box[i][8] + '단</span>' +
-            '</li>');
-        }else {
+                box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;">설정 최대단수 ' + box[i][8] + '단</span>' +
+                '</li>');
+        } else {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
-            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
-            '</li>');
+                box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+                '</li>');
         }
-        
+
     }
-//박스리스트 삭제 다시 걸어줌
-box_list_delet();
+    //박스리스트 삭제 다시 걸어줌
+    box_list_delet();
 }
 //박스 삭제 트리거 걸기
 box_list_delet();
+
 function box_list_delet() {
     $(".ui-state-default").on("click", ".glyphicon-remove", function () { //ui-state-default glyphicon-remove 선택
         var idx = $(this).parent().index();
@@ -169,13 +194,13 @@ $("#boxlist").sortable({
             box[i] = result[i].split(',');
             for (var j = 1; j < box[i].length; j++) {
                 box[i][j] = Number(box[i][j]);
-                
+
             }
             console.log('box', box);
         }
         //컨테이너 박스넣기 재실행
         boxincontainer();
-         //리스트 다시 가져오기
+        //리스트 다시 가져오기
         box_init();
 
     }
@@ -224,14 +249,14 @@ function boxincontainer() {
         var dan = parseInt(container[2] / box[i][3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
         console.log("dan", dan);
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if(box[i][4]<box[i][8]){
+            if (box[i][4] < box[i][8]) {
                 //최대 단수보다 최대 단수가 많을때
-                alert(box[i][0]+ " 박스는 "+box[i][4]+"단 이상 쌓을 수 없습니다. 입력 최대 단수 "+box[i][4]+"단");
-            }else if (box[i][8] != "0"){
-                dan = box[i][8]; 
+                alert(box[i][0] + " 박스는 " + box[i][4] + "단 이상 쌓을 수 없습니다. 입력 최대 단수 " + box[i][4] + "단");
+            } else if (box[i][8] != "0") {
+                dan = box[i][8];
                 //최대단수가 0이 아니면 단수 최대단수로 강제 입력
             }
-            
+
             if (box[i][4] > dan) { //최대 단수보다 수량이 많을때
                 box[i][6] = parseInt(box[i][4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
                 console.log("묶음 수", box[i][6]);
@@ -245,10 +270,10 @@ function boxincontainer() {
                 //단묶음수 = 1
                 box[i][6] = 1;
             }
-        } else{ //1단 이하로 쌓아질떄 = 적재불가
-            alert(box[i][0]+ " 박스는 컨테이너 높이를 초과하는 박스입니다.");
+        } else { //1단 이하로 쌓아질떄 = 적재불가
+            alert(box[i][0] + " 박스는 컨테이너 높이를 초과하는 박스입니다.");
         }
-console.log('box',box);
+        console.log('box', box);
         //묶음 생성
         for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
             $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
