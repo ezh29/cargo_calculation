@@ -129,9 +129,15 @@ function addBoxValue() {
     if (new_box[4] < new_box[8]) {
         //수량보다 설정 최대 단수가 많을때
         alert(new_box[0] + " 박스는 " + new_box[4] + "단 이상 쌓을 수 없습니다. (설정 최대 단수 " + new_box[8] + "단)");
-        
-    }else if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
+
+    } else if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
+    } else if (new_box[1] > container[0]) {
+        alert("컨테이너를 초과하는 장입니다.");
+    } else if (new_box[2] > container[1]) {
+        alert("컨테이너를 초과하는 폭입니다.");
+    } else if (new_box[3] > container[2]) {
+        alert("컨테이너를 초과하는 고입니다.");
     } else {
         box.push(new_box);
         //console.log("box", box);
@@ -214,21 +220,47 @@ $("#boxlist").disableSelection();
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
 
 
-//작은순 정렬하고 컨테이너 넣기
-function start_bubbleSort() {
-    bubbleSort(box);
+//폭 작은순 정렬하고 컨테이너 넣기
+function start_bubbleSort1() {
+    bubbleSort1(box);
+    //컨테이너 박스넣기 재실행
+    boxincontainer();
+    //목록 재실행
+    box_init();
+}
+//장 작은순 정렬하고 컨테이너 넣기
+function start_bubbleSort2() {
+    bubbleSort2(box);
     //컨테이너 박스넣기 재실행
     boxincontainer();
     //목록 재실행
     box_init();
 }
 //작은순으로정렬
-var bubbleSort = function (array) {
+var bubbleSort1 = function (array) {
     var length = array.length;
     var i, j, temp;
+    //폭 비교
     for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
         for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
             if (array[j][2] > array[j + 1][2]) { // 두 수를 비교하여 앞 수가 뒷 수보다 크면
+                temp = array[j]; // 두 수를 서로 바꿔준다
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+    //console.log(array);
+    return array;
+
+};
+var bubbleSort2 = function (array) {
+    var length = array.length;
+    var i, j, temp;
+    //장비교
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (array[j][1] > array[j + 1][1]) { // 두 수를 비교하여 앞 수가 뒷 수보다 크면
                 temp = array[j]; // 두 수를 서로 바꿔준다
                 array[j] = array[j + 1];
                 array[j + 1] = temp;
