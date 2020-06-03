@@ -1,19 +1,17 @@
 //박스 컬러 나열
 var color = ['4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B', '4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B'];
 
-var container = [960, 240, 240]; //기본 사이즈 11톤
+var container = [1020, 240, 240]; //기본 사이즈 25톤
 $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
 
 var box = [];
-
 var box_leng = box.length;
-//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]최대단수
+//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스, [9]최대단수
 //box[0] = ['가나무역', 110, 110, 103, 12, 0];
 //box[1] = ['영코퍼', 110, 150, 100, 3, 0];
 //box[2] = ['이베이', 112, 110, 110, 3, 0];
 //box[3] = ['아마존', 110, 60, 60, 6, 0];
 //box[4] = ['퀄리', 153, 42, 72, 1, 0];
-
 
 
 
@@ -114,10 +112,9 @@ $("#box_val_4").keyup(function () {
 
 //박스 추가
 function addBoxValue() {
+
     var new_box = [];
-
-
-    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음,[9]최대단수
+    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스,[9]최대단수
     new_box[0] = $('#box_val_1').val(); //박스이름
     new_box[1] = Number($('#box_val_2').val()); //장
     new_box[2] = Number($('#box_val_3').val()); //폭
@@ -126,10 +123,14 @@ function addBoxValue() {
     new_box[5] = 1; //기본값 설정
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
+    new_box[8] = Number($('#box_val_6').val()); //설정 최대단수
 
-    new_box[9] = Number($('#box_val_6').val()); //설정 최대단수
 
-    if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
+    if (new_box[4] < new_box[8]) {
+        //수량보다 설정 최대 단수가 많을때
+        alert(new_box[0] + " 박스는 " + new_box[4] + "단 이상 쌓을 수 없습니다. (설정 최대 단수 " + new_box[8] + "단)");
+
+    } else if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
     } else if (new_box[1] > container[0]) {
         alert("컨테이너를 초과하는 장입니다.");
@@ -138,70 +139,26 @@ function addBoxValue() {
     } else if (new_box[3] > container[2]) {
         alert("컨테이너를 초과하는 고입니다.");
     } else {
-        //단수와 나머지 박스 계산
-        //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음
-        var dan = parseInt(container[2] / new_box[3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
-        //console.log("dan", dan);
-        var box_num = ""; //단묶음수 (묶음수만큼 분할해야함)
-        var box_etc = ""; //단나머지수
+        box.push(new_box);
+        //console.log("box", box);
 
-        if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if (new_box[9] != "0") { //최대단수가 0이 아니면 단수 최대단수로 강제 입력
-                dan = new_box[9];
-            }
-            if (new_box[4] > dan) { //최대 단수보다 수량이 많을때
-                new_box[6] = parseInt(new_box[4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
-                console.log("묶음 수", new_box[6]);
-                new_box[5] = dan; //단수 입력
-                new_box[7] = new_box[4] % dan; //묶음 나머지수
-                console.log("묶음 나머지 수", new_box[7]);
-
-            } else { //단수로 쌓을수 있으나 그보다 수량이 적거나 같을때
-                //단수 = 수량 (수량이 단수가 됨)
-                new_box[5] = new_box[4];
-                //단묶음수 = 1
-                new_box[6] = 1;
-            }
-
-            // 박스 분할하여 추가하기 체크여부 확인
-            if ($("input:checkbox[name=box_abxolute]").is(":checked") == true) { //박스 분할하기 체크되어있으면
-
-
-            } else { //체크 안했으면 그냥 배열 추가
-                console.log("노체크 배열 추가");
-                box.push(new_box);
-            }
-
-            console.log("box", box);
-
-            //박스리스트 가져오기
-            box_init();
-            //컨테이너 박스넣기 재실행
-            boxincontainer();
-            //console.log('box', box);
-
-        } else { //1단 이하로 쌓아질떄 = 적재불가
-            alert(new_box[0] + " 박스는 컨테이너 높이를 초과하는 박스입니다.");
-        }
+        //박스리스트 가져오기
+        box_init();
+        //컨테이너 박스넣기 재실행
+        boxincontainer();
+        //console.log('box', box);
     }
 
 }
-
-
 
 //박스 리스트 가져오기
 function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
-        if (box[i][9] != "0" && box[i][9] > box[i][4]) { //최대단수가 수량보다 크면 뱃지 비활성화
+        if (box[i][8] != "0") {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;background-color:#bbb;">설정 최대단수 ' + box[i][9] + '단</span>' +
-                '</li>');
-        } else if (box[i][9] != "0") {
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
-                box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px; ">설정 최대단수 ' + box[i][9] + '단</span>' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;">설정 최대단수 ' + box[i][8] + '단</span>' +
                 '</li>');
         } else {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
@@ -321,46 +278,46 @@ function boxincontainer() {
     for (var i = 0; i < box.length; i++) {
         //console.log(box[i][0], "번 박스");
 
+        //단수와 나머지 박스 계산
+        //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8]인덱스
+        var dan = parseInt(container[2] / box[i][3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
+        console.log("dan", dan);
+        if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
+            if (box[i][4] < box[i][8]) {
+                //수량보다 설정 최대 단수가 많을때
+                alert(box[i][0] + " 박스는 " + box[i][4] + "단 이상 쌓을 수 없습니다. (설정 최대 단수 " + box[i][8] + "단)");
+            } else if (box[i][8] != "0") {
+                dan = box[i][8];
+                //최대단수가 0이 아니면 단수 최대단수로 강제 입력
+            }
 
+            if (box[i][4] > dan) { //최대 단수보다 수량이 많을때
+                box[i][6] = parseInt(box[i][4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
+                console.log("묶음 수", box[i][6]);
+                box[i][5] = dan; //단수 입력
+                box[i][7] = box[i][4] % dan; //묶음 나머지수
+                console.log("묶음 나머지 수", box[i][7]);
+
+            } else { //단수로 쌓을수 있으나 그보다 수량이 적거나 같을때
+                //단수 = 수량 (수량이 단수가 됨)
+                box[i][5] = box[i][4];
+                //단묶음수 = 1
+                box[i][6] = 1;
+            }
+        } else { //1단 이하로 쌓아질떄 = 적재불가
+            alert(box[i][0] + " 박스는 컨테이너 높이를 초과하는 박스입니다.");
+            break;
+        }
+        console.log('box', box);
         //묶음 생성
         for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
             $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
         }
-        //나머지 박스 생성 (박스 분리 입력 아닐때)
-        if ($("input:checkbox[name=box_abxolute]").is(":checked") == false) {
-            if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
+        //나머지 박스 생성
+        if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
+            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
 
-            }
         }
 
     }
-}
-
-
-//적재함 토글
-$("#togle_btn").on("click", function () {
-    $("#togle_body").toggle(300);
-});
-//박스추가 토글
-$("#togle_btn2").on("click", function () {
-    $("#togle_body2").toggle(300);
-});
-
-//전체 토글
-$("#togle_btn3").on("click", function () {
-    $(".all_toggle_body").toggle(300);
-});
-
-//박스목록 비우기
-function all_delet_boxlist() {
-    var con_test = confirm("박스목록을 모두 지우시겠습니까?");
-    if (con_test == true) {
-        box = [];
-        //컨테이너 박스넣기 재실행
-        boxincontainer();
-        //목록 재실행
-        box_init();
-    }
-
 }
