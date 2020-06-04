@@ -2,7 +2,7 @@
 var color = ['4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B', '4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B'];
 
 var container = [960, 240, 240]; //기본 사이즈 11톤
-$('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+$('.container_info').html("11톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
 
 var box = [];
 
@@ -25,31 +25,31 @@ $("input:radio[name=container_size]").click(function () {
             container = [260, 160, 160];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("1톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option2": //2.5톤 트럭 420*180*180
             container = [420, 180, 180];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("2.5톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option3": //5톤 트럭 620*230*230
             container = [620, 230, 230];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("5톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option4": //11톤 트럭  960*240*240
             container = [960, 240, 240];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("11톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option5": //25톤 트럭 1020 * 240 * 240
             container = [1020, 240, 240];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("25톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "size_input":
             container[0] = Number($("#container_size_1").val());
