@@ -7,7 +7,7 @@ $('.container_info').html("11톤 "+container[0] + ' * ' + container[1] + ' * ' +
 var box = [];
 
 var box_leng = box.length;
-//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]최대단수
+//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]다단적재
 //box[0] = ['가나무역', 110, 110, 103, 12, 0];
 //box[1] = ['영코퍼', 110, 150, 100, 3, 0];
 //box[2] = ['이베이', 112, 110, 110, 3, 0];
@@ -117,7 +117,7 @@ function addBoxValue() {
     var new_box = [];
 
 
-    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음,[9]최대단수
+    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음,[9]다단적재
     new_box[0] = $('#box_val_1').val(); //박스이름
     new_box[1] = Number($('#box_val_2').val()); //장
     new_box[2] = Number($('#box_val_3').val()); //폭
@@ -127,7 +127,7 @@ function addBoxValue() {
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
 
-    new_box[9] = Number($('#box_val_6').val()); //설정 최대단수
+    new_box[9] = Number($('#box_val_6').val()); //설정 다단적재
 
     if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
@@ -146,7 +146,7 @@ function addBoxValue() {
         var box_etc = ""; //단나머지수
 
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if (new_box[9] != "0") { //최대단수가 0이 아니면 단수 최대단수로 강제 입력
+            if (new_box[9] != "0") { //다단적재가 0이 아니면 단수 다단적재로 강제 입력
                 dan = new_box[9];
             }
             if (new_box[4] > dan) { //최대 단수보다 수량이 많을때
@@ -193,15 +193,15 @@ function addBoxValue() {
 function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
-        if (box[i][9] != "0" && box[i][9] > box[i][4]) { //최대단수가 수량보다 크면 뱃지 비활성화
+        if (box[i][9] != "0" && box[i][9] > box[i][4]) { //다단적재가 수량보다 크면 뱃지 비활성화
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;background-color:#bbb;">설정 최대단수 ' + box[i][9] + '단</span>' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;background-color:#bbb;">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else if (box[i][9] != "0") {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px; ">설정 최대단수 ' + box[i][9] + '단</span>' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px; ">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else {
             $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
