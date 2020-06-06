@@ -2,7 +2,7 @@
 var color = ['4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B', '4B77BE', '4DB3A2', 'D05454', 'F3C200', '5C9BD1', '8E44AD', '1BBC9B'];
 
 var container = [960, 240, 240]; //기본 사이즈 11톤
-$('.container_info').html("11톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+$('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
 
 var box = [];
 
@@ -16,10 +16,10 @@ var box_leng = box.length;
 
 
 //드래그 설정
-function drag_init(){
-$( function() {
-    $( ".box" ).draggable();
-  } );    
+function drag_init() {
+    $(function () {
+        $(".box").draggable();
+    });
 }
 
 //컨데이너 사이즈 체크
@@ -30,31 +30,31 @@ $("input:radio[name=container_size]").click(function () {
             container = [260, 160, 160];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html("1톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("1톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option2": //2.5톤 트럭 420*180*180
             container = [420, 180, 180];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html("2.5톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("2.5톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option3": //5톤 트럭 620*230*230
             container = [620, 230, 230];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html("5톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("5톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option4": //11톤 트럭  960*240*240
             container = [960, 240, 240];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html("11톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "option5": //25톤 트럭 1020 * 240 * 240
             container = [1020, 240, 240];
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html("25톤 "+container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info').html("25톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
             break;
         case "size_input":
             container[0] = Number($("#container_size_1").val());
@@ -199,17 +199,17 @@ function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
         if (box[i][9] != "0" && box[i][9] > box[i][4]) { //다단적재가 수량보다 크면 뱃지 비활성화
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+');" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;background-color:#bbb;">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else if (box[i][9] != "0") {
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px; ">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else {
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                 '</li>');
@@ -326,20 +326,44 @@ function boxincontainer() {
     for (var i = 0; i < box.length; i++) {
         //console.log(box[i][0], "번 박스");
 
-
         //묶음 생성
         for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"> <span>' + box[i][0] + '<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            //박스명 체크
+            var str = box[i][0];
+            if (box[i][0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+                box[i][0] = box[i][0] + '<br/>';
+            }
+            
+            //박스 200*200 이상이면 글씨 검장
+            if(box[i][1]>=200 && box[i][2]>=200){
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')"> <span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            }else{
+                 $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')"> <span  class="box_info">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            }
+            
+
         }
         //나머지 박스 생성 (박스 분리 입력 아닐때)
         if ($("input:checkbox[name=box_abxolute]").is(":checked") == false) {
             if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+'); "> <span>' + box[i][0] + '<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
 
+                //박스명 체크
+                var str = box[i][0];
+                if (box[i][0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+                    box[i][0] = box[i][0] + '<br/>';
+                }
+                //박스 200*200 이상이면 글씨 검장
+            if(box[i][1]>=200 && box[i][2]>=200){
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + '); "> <span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
+            }else{
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + '); "> <span  class="box_info">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
             }
-        }
+                
+            }
 
+        }
     }
+
     drag_init();
 }
 
