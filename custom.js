@@ -15,7 +15,12 @@ var box_leng = box.length;
 //box[4] = ['퀄리', 153, 42, 72, 1, 0];
 
 
-
+//드래그 설정
+function drag_init(){
+$( function() {
+    $( ".box" ).draggable();
+  } );    
+}
 
 //컨데이너 사이즈 체크
 $("input:radio[name=container_size]").click(function () {
@@ -194,17 +199,17 @@ function box_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
         if (box[i][9] != "0" && box[i][9] > box[i][4]) { //다단적재가 수량보다 크면 뱃지 비활성화
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+');" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px;background-color:#bbb;">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else if (box[i][9] != "0") {
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="badge" style="font-size:12px; margin-right:10px; ">설정 다단적재 ' + box[i][9] + '단</span>' +
                 '</li>');
         } else {
-            $('#boxlist').append('<li class="ui-state-default" style="border-color:#' + color[i] + ';" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
+            $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                 '</li>');
@@ -324,17 +329,18 @@ function boxincontainer() {
 
         //묶음 생성
         for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
-            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+            $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+')"> <span>' + box[i][0] + '<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
         }
         //나머지 박스 생성 (박스 분리 입력 아닐때)
         if ($("input:checkbox[name=box_abxolute]").is(":checked") == false) {
             if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:#' + color[i] + '; "> <span>' + box[i][0] + ' 박스<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
+                $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px;  background:rgb(' + box[i][1] +','+box[i][2]+','+box[i][3]+'); "> <span>' + box[i][0] + '<br/> ' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>'); //단수를 나머지 수량으로 해서 하나더 추가
 
             }
         }
 
     }
+    drag_init();
 }
 
 
