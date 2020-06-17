@@ -18,7 +18,7 @@ var box_leng = box.length;
 //드래그 설정
 function drag_init() {
     $(function () {
-        $(".box").draggable();
+        $(".box").draggable({ snap: true });
     });
 }
 
