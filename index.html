@@ -10,7 +10,41 @@
 </head>
 
 <body>
-    <div class="" style="padding: 20px; overflow: hidden; min-width: 1200px;">
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://ezh29.dothome.co.kr/" target="_blank">Gray Sheep Coding</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">적재함 계산 프로그램</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="https://ezh29.github.io/portfolio/" target="_blank">Contact</a></li>
+<!--
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container " style="overflow: hidden;min-width: 1200px;margin: 70px auto;">
 
         <div id="input_area" style="width: 500px;float: left; padding: 0 20px">
             <div class="panel panel-default">
@@ -74,7 +108,7 @@
                         <div class="form-group">
                             <span style="margin-right: 10px;">박스명 </span>
                             <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
-                            <span style="margin-right: 10px;">다단적재 설정 </span>
+                            <span style="margin-right: 10px;">최대단수 설정 </span>
                             <input style="width: 50px; margin-right:5px" type="text" class="form-control" id="box_val_6" placeholder="0" value="1"> 단
                         </div>
                     </form>
