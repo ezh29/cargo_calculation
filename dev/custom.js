@@ -191,8 +191,8 @@ function addBoxValue() {
             if (new_box[1] >= 200 && new_box[2] >= 200) {
                 var box_idx = box.length - 1;
                 $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + box_idx + '">' +
-                    '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-                    '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+                    '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+                    '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
                     ' <span  class="box_info" style="color:#000;">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
             } else {
                 var box_idx = box.length - 1;
@@ -365,8 +365,8 @@ function boxincontainer() {
             //박스 200*200 이상이면 글씨 검장
             if (box[i][1] >= 200 && box[i][2] >= 200) {
                 $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')" box_idx="' + i + '"> ' +
-                    '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-                    '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+                    '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+                    '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
                     '<span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>' +
                     '</div>');
             } else {
@@ -390,8 +390,8 @@ function boxincontainer() {
                 //박스 200*200 이상이면 글씨 검장
                 if (box[i][1] >= 200 && box[i][2] >= 200) {
                     $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')" box_idx="' + i + '"> ' +
-                        '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-                        '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+                        '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+                        '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
                         '<span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>' +
                         '</div>');
                 } else {
@@ -533,8 +533,8 @@ function change_init() {
 function in_txt(i, par) {
     //박스 200*200 이상이면 글씨 검장
     if (box[i][1] >= 200 && box[i][2] >= 200) {
-        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-            '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
             '<span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
     } else {
         par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
