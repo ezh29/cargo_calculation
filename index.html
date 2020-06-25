@@ -4,7 +4,7 @@
 <head>
     <title>적재함 계산 프로그램 - Gray Sheep</title>
     <meta charset="utf-8" />
-        <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css?ver=1.2">
@@ -28,15 +28,15 @@
                 <div class="panel-body" id="togle_body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option1" >
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option1">
                             1톤 트럭 260*160*160
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option2" >
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option2">
                             2.5톤 트럭 420*180*180
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option3" >
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option3">
                             5톤 트럭 620*230*230
                         </label><br />
                         <label>
@@ -44,7 +44,7 @@
                             11톤 트럭 960*240*240
                         </label><br />
                         <label>
-                            <input type="radio" name="container_size" id="optionsRadios1" value="option5" >
+                            <input type="radio" name="container_size" id="optionsRadios1" value="option5">
                             25톤 트럭 1020 * 240 * 240
                         </label>
                     </div>
@@ -64,8 +64,8 @@
                         </form>
                     </div>
                     <hr />
-<!--                    적재함 사이즈-->
-                    <div class="well" style="text-align: center; margin-bottom: 0;">  <span class="container_info" style="font-weight: bold;"></span></div>
+                    <!--                    적재함 사이즈-->
+                    <div class="well" style="text-align: center; margin-bottom: 0;"> <span class="container_info" style="font-weight: bold;"></span></div>
                 </div>
             </div>
             <div class="panel panel-primary all_toggle_body">
@@ -97,7 +97,7 @@
                         <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
                         <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
                     </div>
-<!--
+                    <!--
                     <div class="checkbox">
                         <label class="btn btn-default btn-block">
                             <input type="checkbox" value="" name="box_abxolute">
@@ -125,13 +125,13 @@
 
         </div>
         <div id="container_area" style="float: left;">
-<!--           적재함 사이즈-->
-            <div class="" style="text-align: center; margin-bottom: 0; color: #666;"> 
+            <!--           적재함 사이즈-->
+            <div class="" style="text-align: center; margin-bottom: 0; color: #666;">
                 <span class="container_info" style="font-weight: bold;"></span>
             </div>
         </div>
     </div>
-    <img class="btn_float" src="img/profile.png" alt="" data-toggle="tooltip"  data-html="true" data-placement="left" title="
+    <img class="btn_float" src="img/profile.png" alt="" data-toggle="tooltip" data-html="true" data-placement="left" title="
 안녕?" onclick="window.open('https://ezh29.github.io/portfolio/')">
 
 </body>
@@ -144,8 +144,8 @@
 
 <script>
     $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
         $('.btn_float').mouseenter(function() {
+
             var txt = [
                 "웬 빨간 양?",
                 "오늘도 힘내~",
@@ -168,6 +168,7 @@
             $('.btn_float').attr("title", txt[i]);
             $('.btn_float').attr("data-original-title", txt[i]);
             $('[data-toggle="tooltip"]').tooltip();
+
         })
 
         function getRandom(min, max) {
