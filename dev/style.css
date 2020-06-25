@@ -97,3 +97,12 @@
 #boxlist .change_size {
     margin-right: 5px;
 }
+
+
+
+/*플로팅 버튼*/
+.btn_float{ width: 40px;
+    border-radius: 50%;
+    position: fixed;
+    right: 10px;
+    bottom: 10px; cursor: pointer;}
