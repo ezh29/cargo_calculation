@@ -131,8 +131,8 @@
             </div>
         </div>
     </div>
-    <img class="btn_float" src="img/profile.png" alt="" data-toggle="tooltip" data-placement="left" title="
-Are you curious?" onclick="window.open('https://ezh29.github.io/portfolio/')">
+    <img class="btn_float" src="img/profile.png" alt="" data-toggle="tooltip"  data-html="true" data-placement="left" title="
+안녕?" onclick="window.open('https://ezh29.github.io/portfolio/')">
 
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -141,9 +141,39 @@ Are you curious?" onclick="window.open('https://ezh29.github.io/portfolio/')">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="touch-punch.min.js"></script>
 
+
 <script>
     $(function() {
-	$('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.btn_float').mouseenter(function() {
+            var txt = [
+                "웬 빨간 양?",
+                "오늘도 힘내~",
+                "점심 뭐 먹을 거야?",
+                "퇴근 30분 남았어!",
+                "아아 먹고 싶다..",
+                "저녁 뭐 먹지?",
+                "야옹",
+                "나는 햄버거가 좋아",
+                "이번 여름은 너무 더울 거 같아..",
+                "누르면 나에 대해 알 수 있어",
+                "내가 몇 가지나 말하나 궁금해?",
+                "버그가 있어도 귀엽게 봐줘...",
+                "그래도 이 정도면 <br/>쓸만하지..?",
+                "도움이 많이 됐으면 좋겠다",
+                "오늘도 켰네! <br/>자주 사용해서 기분좋아"
+
+            ];
+            var i = getRandom(1, txt.length);
+            $('.btn_float').attr("title", txt[i]);
+            $('.btn_float').attr("data-original-title", txt[i]);
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+
+        function getRandom(min, max) {
+            return Math.floor((Math.random() * (max - min + 1)) + min);
+        }
+
     });
 
 </script>
