@@ -145,8 +145,8 @@
 
 <script>
     $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
         $('.btn_float').mouseenter(function() {
-
             var txt = [
                 "웬 빨간 양?",
                 "오늘도 힘내~",
@@ -166,7 +166,7 @@
 
             ];
             var i = getRandom(1, txt.length);
-            $('.btn_float').attr("title", txt[i]);
+            //$('.btn_float').attr("title", txt[i]);
             $('.btn_float').attr("data-original-title", txt[i]);
             $('[data-toggle="tooltip"]').tooltip();
 
