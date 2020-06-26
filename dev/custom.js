@@ -187,21 +187,60 @@ function addBoxValue() {
             //boxincontainer();
             //console.log('box', box);
             //위치변경 안하고 박스 추가
-            //박스 200*200 이상이면 글씨 검장
-            if (new_box[1] >= 200 && new_box[2] >= 200) {
-                var box_idx = box.length - 1;
-                $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + box_idx + '">' +
-                    '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
-                    '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
-                    ' <span  class="box_info" style="color:#000;">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
-            } else {
-                var box_idx = box.length - 1;
+            //루프돌며 박스 생성
+                //묶음 생성
+                for (var j = 0; j < new_box[6]; j++) { //단 묶음수길이만큼 돌림
+                    //박스명 체크
+                    var str = new_box[0];
+                    if (new_box[0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+                        new_box[0] = new_box[0] + '<br/>';
+                    }
+                    var idx = box.length-1;
+                    //박스 200*200 이상이면 글씨 검장
+                    if (new_box[1] >= 200 && new_box[2] >= 200) {
+                        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
+                            '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+                            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
+                            '<span  class="box_info" style="color:#000;">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span>' +
+                            '</div>');
+                    } else {
+                        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
+                            '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
+                            '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+                            '<span  class="box_info">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
+                    }
 
-                $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + box_idx + '">' +
-                    '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-                    '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
-                    ' <span  class="box_info">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
-            }
+
+                }
+                //나머지 박스 생성 (박스 분리 입력 아닐때)
+                if ($("input:checkbox[name=box_abxolute]").is(":checked") == false) {
+                    if (new_box[7] > 0) { //묶음 나머지가 있는 박스라면
+
+                        //박스명 체크
+                        var str = new_box[0];
+                        if (new_box[0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+                            new_box[0] = new_box[0] + '<br/>';
+                        }
+                    var idx = box.length-1;
+                        //박스 200*200 이상이면 글씨 검장
+                        if (new_box[1] >= 200 && new_box[2] >= 200) {
+                            $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
+                                '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
+                                '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
+                                '<span  class="box_info" style="color:#000;">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[7] + '단<span>' +
+                                '</div>');//단수를 나머지 수량으로 해서 하나더 추가
+                        } else {
+
+                            $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
+                                '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
+                                '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
+                                '<span  class="box_info">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[7] + '단<span></div>');//단수를 나머지 수량으로 해서 하나더 추가
+                        }
+
+                    }
+
+                }
+
             drag_init();
             change_init();
 
@@ -351,6 +390,7 @@ var bubbleSort2 = function (array) {
 //박스 넣기
 function boxincontainer() {
     $('#container').empty(); //컨테이너 내용물 초기화
+    //루프돌며 박스 생성
     for (var i = 0; i < box.length; i++) {
         //console.log(box[i][0], "번 박스");
 
@@ -392,14 +432,14 @@ function boxincontainer() {
                     $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')" box_idx="' + i + '"> ' +
                         '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
                         '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
-                        '<span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>' +
-                        '</div>');
+                        '<span  class="box_info" style="color:#000;">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span>' +
+                        '</div>');//단수를 나머지 수량으로 해서 하나더 추가
                 } else {
 
                     $('#container').append('<div class="box" style="width:' + box[i][2] + 'px; height:' + box[i][1] + 'px; background:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')" box_idx="' + i + '"> ' +
                         '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
                         '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
-                        '<span  class="box_info">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span></div>');
+                        '<span  class="box_info">' + box[i][0] + '<span class="br"></span>' + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][7] + '단<span></div>');//단수를 나머지 수량으로 해서 하나더 추가
                 }
 
             }
@@ -470,14 +510,15 @@ function change_init() {
         var par = $(this).parent();
         var val = $(this).parent().attr("box_idx");
         var i = val;
+        var this_box = $('.box[box_idx="' + i + '"]');
         console.log("눌림:", i);
         console.log("변경 전 box[i]", box[i]);
 
         ch_garo(i);
         console.log("변경 후 box[i]", box[i]);
-        $(this).parent().css("height", box[i][1]);
-        $(this).parent().css("width", box[i][2]);
-        $(this).parent().css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
+        this_box.css("height", box[i][1]);
+        this_box.css("width", box[i][2]);
+        this_box.css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
         in_txt(i, par);
         //박스목록 다시 불러오기
         box_list_init();
@@ -487,11 +528,12 @@ function change_init() {
         var par = $(this).parent();
         var val = $(this).parent().attr("box_idx");
         var i = val;
+        var this_box = $('.box[box_idx="' + i + '"]');
         console.log("눌림:", i);
         ch_sero(i);
         console.log("변경 후 box[i]", box[i]);
-        $(this).parent().css("width", box[i][2]);
-        $(this).parent().css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
+        this_box.css("width", box[i][2]);
+        this_box.css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
         in_txt(i, par);
         //박스목록 다시 불러오기
         box_list_init();
@@ -503,6 +545,7 @@ function change_init() {
     $("#boxlist .glyphicon-resize-horizontal.change_size").on("click", function () {
         var idx = $(this).parent().index();
         var i = idx;
+        console.log("idx",idx,"i",i);
         var this_box = $('.box[box_idx="' + i + '"]');
         ch_garo(i);
         console.log("변경 후 box[i]", box[i]);
@@ -517,6 +560,7 @@ function change_init() {
     $("#boxlist .glyphicon-resize-vertical.change_size").on("click", function () {
         var idx = $(this).parent().index();
         var i = idx;
+        console.log("idx",idx,"i",i);
         var this_box = $('.box[box_idx="' + i + '"]');
         ch_sero(i);
         console.log("변경 후 box[i]", box[i]);
