@@ -182,15 +182,10 @@ function addBoxValue() {
             //박스리스트 가져오기
             box_init();
             ////컨테이너 박스넣기 재실행
-            //boxincontainer();
+            boxincontainer();
             //console.log('box', box);
             
-             //박스 200*200 이상이면 글씨 검장
-            if(new_box[1]>=200 && new_box[2]>=200){
-                $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')"> <span  class="box_info" style="color:#000;">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
-            }else{
-                 $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')"> <span  class="box_info">' + new_box[0] + '<span class="br"></span>' + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
-            }
+      
             drag_init();
 
         } else { //1단 이하로 쌓아질떄 = 적재불가
