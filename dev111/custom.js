@@ -1,6 +1,7 @@
 var container = [960, 240, 240]; //기본 사이즈 11톤
 $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
 //컨테이너 너비 생성
+$('#container_area').css("width", container[1]+40);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
 
 var box = [];
@@ -26,36 +27,37 @@ function drag_init() {
 //컨데이너 사이즈 체크
 $("input:radio[name=container_size]").click(function () {
     var radioVal = $('input[name="container_size"]:checked').val();
+    function container_css(radioVal){
+        $('#container').css("height", container[0]);
+            $('#container').css("width", container[1]);
+            $('#container_area').css("width", container[1]+40);
+            $('.container_info').html(radioVal+" " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+    }
     switch (radioVal) {
         case "option1": //1톤 트럭 260*160*160
             container = [260, 160, 160];
-            $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('.container_info').html("1톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            radioVal = "1톤";
+            container_css(radioVal)
             break;
         case "option2": //2.5톤 트럭 420*180*180
             container = [420, 180, 180];
-            $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('.container_info').html("2.5톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            radioVal = "2.5톤";
+            container_css(radioVal)
             break;
         case "option3": //5톤 트럭 620*230*230
             container = [620, 230, 230];
-            $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('.container_info').html("5톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            radioVal = "5톤";
+            container_css(radioVal)
             break;
         case "option4": //11톤 트럭  960*240*240
             container = [960, 240, 240];
-            $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            radioVal = "11톤";
+            container_css(radioVal)
             break;
         case "option5": //25톤 트럭 1020 * 240 * 240
             container = [1020, 240, 240];
-            $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('.container_info').html("25톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            radioVal = "25톤";
+            container_css(radioVal)
             break;
         case "size_input":
             container[0] = Number($("#container_size_1").val());
@@ -92,6 +94,7 @@ $("input:radio[name=container_size]").click(function () {
             //위의 값 A~E 모두 아닐때 실행할 명령문;
     }
 });
+
 
 
 
@@ -238,8 +241,12 @@ function boxincontainer(new_box, idx) {
     drag_init();
     //툴팁 초기화
     $('[data-toggle="tooltip"]').tooltip({
-        //trigger: 'click',
-        delay: { "show": 0, "hide": 1500 }
+        trigger: 'click',
+        //delay: { "show": 0, "hide": 1500 }
+    });
+    $('#container_area')
+    .on('mouseleave focusout', function() {
+        $('.box').tooltip('hide');
     });
     //장폭고 변경 초기화
     change_init();
