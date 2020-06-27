@@ -263,10 +263,10 @@ function tooltip_init(){
         trigger: 'click',
         //delay: { "show": 0, "hide": 1500 }
     });
-//    $('#container_area')
-//        .on('mouseleave focusout', function () {
-//            $('.box_info').tooltip('hide');
-//        });
+    $('#container_area')
+        .on('mouseleave focusout', function () {
+            $('.box_info').tooltip('hide');
+        });
 }
 
 
