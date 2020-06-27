@@ -46,7 +46,7 @@
             cursor: move;
         }
 /*박스 정보*/
-/*.box_info {text-shadow: 0px 0px 5px #000;}*/
+.box_info {cursor: pointer;}
 
         /*박스리스트*/
 #boxlist li { border-left: 5px solid #82949a; cursor: move;}
@@ -57,8 +57,9 @@
 /*박스 장폭, 폭고 전환 버튼*/
 .tooltip .glyphicon {font-size: 20px; padding: 20px;}
 .glyphicon{cursor: pointer;}
-.box .glyphicon.change_size {padding: 5px;    cursor: pointer; display: none;}
+.box .glyphicon.change_size {padding: 5px;    cursor: pointer; }
 
+/*
 .box .glyphicon-resize-horizontal.change_size {
     position: absolute;
     left: 3px;
@@ -69,6 +70,7 @@
     bottom: 3px;
     top: initial;
 }
+*/
 #boxlist .change_size {margin-right: 5px;}
 
 

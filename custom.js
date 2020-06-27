@@ -1,7 +1,7 @@
 var container = [960, 240, 240]; //기본 사이즈 11톤
 $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
 //컨테이너 너비 생성
-$('#container_area').css("width", container[1]+40);
+$('#container_area').css("width", container[1] + 40);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
 
 var box = [];
@@ -27,11 +27,12 @@ function drag_init() {
 //컨데이너 사이즈 체크
 $("input:radio[name=container_size]").click(function () {
     var radioVal = $('input[name="container_size"]:checked').val();
-    function container_css(radioVal){
+
+    function container_css(radioVal) {
         $('#container').css("height", container[0]);
-            $('#container').css("width", container[1]);
-            $('#container_area').css("width", container[1]+40);
-            $('.container_info').html(radioVal+" " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+        $('#container').css("width", container[1]);
+        $('#container_area').css("width", container[1] + 40);
+        $('.container_info').html(radioVal + " " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
     }
     switch (radioVal) {
         case "option1": //1톤 트럭 260*160*160
@@ -218,35 +219,31 @@ function boxincontainer(new_box, idx) {
 
     //박스 200*200 이상이면 글씨 검장
     if (new_box[1] >= 200 && new_box[2] >= 200) {
-        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '" ' +
+        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
+
+            //장폭고 아이콘(트리거용)
+            '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000; display:none;" aria-hidden="true"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000; display:none;"" aria-hidden="true"></span>' +
+            //박스 정보
+            '<span  class="box_info" style="color:#000;"' +
             //툴팁
             'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단"> ' +
-            //장폭고 아이콘
-            '<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
-            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
-            //박스 정보
-            '<span  class="box_info" style="color:#000;">' + new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span>' +
+            new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span>' +
             '</div>');
     } else {
-        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"' +
+        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '">' +
+
+            //장폭고 아이콘(트리거용)
+            '<span class="glyphicon glyphicon-resize-horizontal change_size" style="display:none;"  aria-hidden="true"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" style="display:none;" aria-hidden="true"></span>' +
+            //박스 정보
+            '<span  class="box_info"' +
             //툴팁
             'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단"> ' +
-            //장폭고 아이콘
-            '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-            '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
-            //박스 정보
-            '<span  class="box_info">' + new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
+            new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
     }
-    
-    //툴팁 초기화
-    $('[data-toggle="tooltip"]').tooltip({
-        trigger: 'click',
-        //delay: { "show": 0, "hide": 1500 }
-    });
-    $('#container_area')
-    .on('mouseleave focusout', function() {
-        $('.box').tooltip('hide');
-    });
+
+    tooltip_init();
     //장폭고 변경 초기화
     change_init();
     //드래그 초기화
@@ -259,6 +256,17 @@ function tooltip_triger_ho(idx) {
 
 function tooltip_triger_ver(idx) {
     $('.box[box_idx="' + idx + '"] .glyphicon-resize-vertical').trigger('click');
+}
+function tooltip_init(){
+    //툴팁 초기화
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'click',
+        //delay: { "show": 0, "hide": 1500 }
+    });
+//    $('#container_area')
+//        .on('mouseleave focusout', function () {
+//            $('.box_info').tooltip('hide');
+//        });
 }
 
 
@@ -280,7 +288,7 @@ function box_list_init() {
                 '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
                 '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
                 '</li>');
-        } else {//최대단수 설정이 없으면
+        } else { //최대단수 설정이 없으면
             $('#boxlist').append('<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' +
                 box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
                 '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
@@ -560,17 +568,34 @@ function change_init() {
 
 }
 
+
 //장폭고 조절 후 내부 치수 변경
 function in_txt(i, par) {
+     var garosero_btn = "<span class='glyphicon glyphicon-resize-horizontal change_size' onclick='tooltip_triger_ho(" + i + ");' box_idx='" + i + "'></span><span class='glyphicon glyphicon-resize-vertical change_size' onclick='tooltip_triger_ver(" + i + ");' box_idx='" + i + "'></span><br/>";
+    //박스명 체크
+    var str = box[i][0];
+    if (box[i][0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+        box[i][0] = box[i][0] + '<br/>';
+    }
     //박스 200*200 이상이면 글씨 검장
     if (box[i][1] >= 200 && box[i][2] >= 200) {
-        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000;" aria-hidden="true"></span>' +
-            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000;" aria-hidden="true"></span>' +
-            '<span  class="box_info" style="color:#000;">' + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
+        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" style="color:#000; display:none;" aria-hidden="true"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" style="color:#000; display:none;" aria-hidden="true"></span>' +
+            //박스 정보
+            '<span  class="box_info" style="color:#000;"' +
+            //툴팁
+            'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단"> ' +
+            box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
     } else {
-        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"></span>' +
-            '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true"></span>' +
-            '<span  class="box_info">' + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
+        par.html('<span class="glyphicon glyphicon-resize-horizontal change_size" style="display:none;" aria-hidden="true"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" style="display:none;" aria-hidden="true"></span>' +
+            //박스 정보
+            '<span  class="box_info"' +
+            //툴팁
+            'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단"> ' +
+            box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
     }
+    tooltip_init();
     change_init();
+    
 }
