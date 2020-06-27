@@ -237,8 +237,7 @@ function boxincontainer(new_box, idx) {
             //박스 정보
             '<span  class="box_info">' + new_box[0] + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + new_box[5] + '단<span></div>');
     }
-    //드래그 초기화
-    drag_init();
+    
     //툴팁 초기화
     $('[data-toggle="tooltip"]').tooltip({
         trigger: 'click',
@@ -250,6 +249,8 @@ function boxincontainer(new_box, idx) {
     });
     //장폭고 변경 초기화
     change_init();
+    //드래그 초기화
+    drag_init();
 }
 //툴팁 장폭고 버튼 트리거
 function tooltip_triger_ho(idx) {
