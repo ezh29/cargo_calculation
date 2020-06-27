@@ -42,7 +42,8 @@
             text-align: center;
             justify-content: center;
             border-radius: 5px;
-            font-size: 12px
+            font-size: 12px;
+            cursor: move;
         }
 /*박스 정보*/
 /*.box_info {text-shadow: 0px 0px 5px #000;}*/
@@ -53,33 +54,24 @@
 #boxlist strong {display: inline-block; margin: 0 10px;}
 
 
-.grid {
-  position: relative;
+/*박스 장폭, 폭고 전환 버튼*/
+.tooltip .glyphicon {font-size: 20px; padding: 20px;}
+.glyphicon{cursor: pointer;}
+.box .glyphicon.change_size {padding: 5px;    cursor: pointer; display: none;}
+
+.box .glyphicon-resize-horizontal.change_size {
+    position: absolute;
+    left: 3px;
 }
-.item {
-  display: block;
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  margin: 5px;
-  z-index: 1;
-  background: #000;
-  color: #fff;
+.box .glyphicon-resize-vertical.change_size {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    top: initial;
 }
-.item.muuri-item-dragging {
-  z-index: 3;
-}
-.item.muuri-item-releasing {
-  z-index: 2;
-}
-.item.muuri-item-hidden {
-  z-index: 0;
-}
-.item-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+#boxlist .change_size {margin-right: 5px;}
+
+
 
 
 /*플로팅 버튼*/
@@ -88,4 +80,3 @@
     position: fixed;
     right: 10px;
     bottom: 10px; cursor: pointer;}
-
