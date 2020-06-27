@@ -9,15 +9,19 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css?ver=1.2">
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170902576-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170902576-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-170902576-2');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-170902576-2');
+
+    </script>
 </head>
 
 <body>
@@ -106,15 +110,6 @@
                         <button type="button" onclick="start_bubbleSort1();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;margin-right: 2%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 폭 작은순으로 정렬</button>
                         <button type="button" onclick="start_bubbleSort2();" class="btn btn-default btn-block" style="width: 49%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 장 작은순으로 정렬</button>
                     </div>
-                    <!--
-                    <div class="checkbox">
-                        <label class="btn btn-default btn-block">
-                            <input type="checkbox" value="" name="box_abxolute">
-                            박스 분할하여 추가하기<br/>
-                            <span style="font-size: 12px;    color: #999;">(박스를 묶음별로 개별 추가합니다. 각각 드래그가 가능합니다.)</span>
-                        </label>
-                    </div>
--->
                 </div>
             </div>
             <div class="panel panel-info box_list">
@@ -134,23 +129,21 @@
 
         </div>
         <div id="container_area_wrap" style="margin-left: 480px;">
-           <div id="container_area">
-               
-            <!--적재함 사이즈-->
-            <div class="" style="margin-bottom: 0; color: #666;">
-                <span class="container_info" style="font-weight: bold;"></span>
+            <div id="container_area">
+                <!--적재함 사이즈-->
+                <div class="" style="margin-bottom: 0; color: #666;">
+                    <span class="container_info" style="font-weight: bold;"></span>
+                </div>
             </div>
-           </div>
         </div>
     </div>
-    <p style="position: fixed;    top: 5px;    right: 5px; text-align: right">dev_ver 1.1.2 추가사항<br/>박스 클릭시 툴팁이 생기며<br/>툴팁 내의 장폭고 조절 버튼을 통해<br/> 박스의 장폭고 조절이가능합니다.</p>
+    <p style="position: fixed;    top: 5px;    right: 5px; text-align: right">dev_ver 1.1.2 추가사항<br />박스 클릭시 툴팁이 생기며<br />툴팁 내의 장폭고 조절 버튼을 통해<br /> 박스의 장폭고 조절이가능합니다.</p>
     <img class="btn_float" src="img/profile.png" alt="" data-toggle="tooltip" data-html="true" data-placement="left" title="안녕?" onclick="window.open('https://ezh29.github.io/portfolio/')">
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="custom.js?ver=1.6"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="touch-punch.min.js"></script>
 
 <script>
     $(function() {
@@ -164,6 +157,7 @@
                 "아아 먹고 싶다..",
                 "저녁 뭐 먹지?",
                 "야옹",
+                "야옹야옹",
                 "나는 햄버거가 좋아",
                 "이번 여름은 너무 더울 거 같아..",
                 "누르면 나에 대해 알 수 있어",
@@ -172,8 +166,9 @@
                 "그래도 이 정도면 <br/>쓸만하지..?",
                 "도움이 많이 됐으면 좋겠다",
                 "오늘도 켰네! <br/>자주 사용해서 기분좋아",
-                "복길이가 매질해서 만든 작품이야"
-                
+                "복길이가 매질해서 만든 작품이야",
+                "뽀실이는 뽀실뽀실"
+
 
             ];
             var i = getRandom(1, txt.length);
