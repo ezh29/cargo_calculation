@@ -156,10 +156,10 @@ function tooltip_start() {
         trigger: 'click',
         //delay: { "show": 0, "hide": 1500 }
     });
-    //    $('#container_area')
-    //        .on('mouseleave focusout', function () {
-    //            $('.box_info').tooltip('hide');
-    //        });
+        $('#container_area')
+            .on('mouseleave focusout', function () {
+                $('.box_info').tooltip('hide');
+            });
 }
 
 //툴팁 장폭고 버튼 트리거
