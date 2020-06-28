@@ -12,6 +12,7 @@ $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * '
 //컨테이너 너비 생성
 $('#container_area').css("width", container[1] + 40);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
+//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]다단적재
 
 var box = [];
 //컨데이너 사이즈 체크
@@ -302,16 +303,18 @@ function boxincontainer(new_box, idx, dan) {
 function box_list_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     for (var i = 0; i < box.length; i++) {
-        var dansu = '<span class="badge">최대단수 ' + box[i][9] + '단</span>';
+        var dansu = '<span class="badge"> ' + box[i][9] + '단</span>';
 
         //조건따라 단수유무, 배경색 설정
         if (box[i][9] != "0" && box[i][9] > box[i][4]) { //최대단수 설정이 수량보다 크면 뱃지 비활성화
-            dansu = '<span class="badge" style="background-color:#bbb;">최대단수 ' + box[i][9] + '단</span>';
+            dansu = '<span class="badge" style="background-color:#bbb;"> ' + box[i][9] + '단</span>';
         } else if (box[i][9] != "0") {} else { //최대단수 설정이 없으면
             dansu = '';
         }
 
         //#boxlist에 넣기
+        var CBM = (box[i][1]*0.01) * (box[i][2]*0.01)* (box[i][3]*0.01) * box[i][4];
+        CBM = Math.floor(CBM*100)/100;
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             //삭제버튼
             '<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="box_list_delet_btn(' + i + ')"></span> ' +
@@ -321,9 +324,10 @@ function box_list_init() {
             //위아래 버튼
             '<span class="glyphicon glyphicon-triangle-bottom change_size" aria-hidden="true" onclick="ch_down_btn(' + i + ');"></span>' +
             '<span class="glyphicon glyphicon-triangle-top change_size" aria-hidden="true" onclick="ch_up_btn(' + i + ');"></span>' +
-            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
+            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 '  +
             //단수 뱃지
             dansu +
+            '<span class="badge"> ' + CBM + 'CBM</span>'+
             '</li>';
         $('#boxlist').append(append);
     }
