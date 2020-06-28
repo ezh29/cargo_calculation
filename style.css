@@ -13,7 +13,7 @@
 .box {border: 1px solid #333;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
 border-radius: 5px;font-size: 12px;cursor: move;}
 /*박스 정보*/
-.box_info {cursor: pointer;}
+.box_info {cursor: pointer; line-height: 1;}
 
 /*박스리스트*/
  #boxlist {list-style-type: none;margin-top: 20px;padding: 0;width: 100%;}

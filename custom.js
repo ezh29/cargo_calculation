@@ -122,8 +122,6 @@ $("#boxlist").sortable({
         console.log('box', box);
         //컨테이너 박스넣기 재실행
         boxincontainer_init();
-        //목록 재실행
-        box_list_init();
     }
 });
 $("#boxlist").disableSelection();
@@ -222,23 +220,7 @@ function addBoxValue_btn() {
             }
             box.push(new_box);
 
-            //박스리스트 가져오기
-            box_list_init();
-            //위치변경 안하고 박스 추가
-            //박스에 심어줄 인덱스
-            var idx = box.length - 1;
-            //루프돌며 박스 생성
-            //묶음 생성
-            for (var j = 0; j < new_box[6]; j++) { //단 묶음수길이만큼 돌림
-                dan = new_box[5];
-                boxincontainer(new_box, j, dan);
-            }
-            if (new_box[7] > 0) { //묶음 나머지가 있는 박스라면
-                //단을 나머지로 변경하여
-                dan = new_box[7];
-                //한번더 박스 추가
-                boxincontainer(new_box, j, dan);
-            }
+            boxincontainer_init()
 
         } else { //1단 이하로 쌓아질떄 = 적재불가
             alert(new_box[0] + " 박스는 컨테이너 높이를 초과하는 박스입니다.");
@@ -285,6 +267,8 @@ function boxincontainer_init() {
             boxincontainer(box[i], i, dan);
         }
     }
+    //박스 리스트 초기화
+    box_list_init();
 }
 //박스 넣기 
 function boxincontainer(new_box, idx, dan) {
@@ -331,8 +315,6 @@ function box_list_init() {
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             //삭제버튼
             '<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="box_list_delet_btn(' + i + ')"></span> ' +
-            //단수 뱃지
-            dansu +
             //장폭고 버튼
             '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true" onclick="ch_sero_btn(' + i + ');"></span>' +
             '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"onclick="ch_garo_btn(' + i + ');"></span>' +
@@ -340,6 +322,8 @@ function box_list_init() {
             '<span class="glyphicon glyphicon-triangle-bottom change_size" aria-hidden="true" onclick="ch_down_btn(' + i + ');"></span>' +
             '<span class="glyphicon glyphicon-triangle-top change_size" aria-hidden="true" onclick="ch_up_btn(' + i + ');"></span>' +
             box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개' +
+            //단수 뱃지
+            dansu +
             '</li>';
         $('#boxlist').append(append);
     }
@@ -351,8 +335,6 @@ function box_list_delet_btn(i) {
     var spliced = box.splice(i, 1); //해당 인덱스 배열 삭제
     //컨테이너 박스넣기 재실행
     boxincontainer_init();
-    //리스트 다시 가져오기
-    box_list_init();
 }
 
 
@@ -363,16 +345,24 @@ function start_bubbleSort1_btn() {
     bubbleSort1(box);
     //컨테이너 박스넣기 재실행
     boxincontainer_init();
-    //목록 재실행
-    box_list_init();
 }
 //장 작은순 정렬하고 컨테이너 넣기
 function start_bubbleSort2_btn() {
     bubbleSort2(box);
     //컨테이너 박스넣기 재실행
     boxincontainer_init();
-    //목록 재실행
-    box_list_init();
+}
+//폭 큰순 정렬하고 컨테이너 넣기
+function start_bubbleSort1_2_btn() {
+    bubbleSort1_2(box);
+    //컨테이너 박스넣기 재실행
+    boxincontainer_init();
+}
+//장 큰순 정렬하고 컨테이너 넣기
+function start_bubbleSort2_2_btn() {
+    bubbleSort2_2(box);
+    //컨테이너 박스넣기 재실행
+    boxincontainer_init();
 }
 //작은순으로정렬
 var bubbleSort1 = function (array) {
@@ -388,7 +378,6 @@ var bubbleSort1 = function (array) {
             }
         }
     }
-    //console.log(array);
     return array;
 
 };
@@ -405,10 +394,42 @@ var bubbleSort2 = function (array) {
             }
         }
     }
-    //console.log(array);
+    return array;
+};
+//큰순으로정렬
+var bubbleSort1_2 = function (array) {
+    var length = array.length;
+    var i, j, temp;
+    //폭 비교
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (array[j][2] < array[j + 1][2]) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+                temp = array[j]; // 두 수를 서로 바꿔준다
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
     return array;
 
 };
+var bubbleSort2_2 = function (array) {
+    var length = array.length;
+    var i, j, temp;
+    //장비교
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (array[j][1] < array[j + 1][1]) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+                temp = array[j]; // 두 수를 서로 바꿔준다
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+    return array;
+
+};
+
 
 //박스목록 비우기
 function all_delet_boxlist_btn() {
@@ -417,8 +438,6 @@ function all_delet_boxlist_btn() {
         box = [];
         //컨테이너 박스넣기 재실행
         boxincontainer_init();
-        //목록 재실행
-        box_list_init();
     }
 }
 
@@ -433,13 +452,7 @@ function ch_garo_btn(i) {
     box[i][1] = box[i][2]; //장에 폭 넣음
     box[i][2] = d; //폭에 장 넣음
 
-    console.log("변경 후 box[i]", box[i]);
-    target_box.css("height", box[i][1]);
-    target_box.css("width", box[i][2]);
-    target_box.css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
-    in_txt(i, target_box);
-    //박스목록 다시 불러오기
-    box_list_init();
+    boxincontainer_init();
 };
 //폭고 토글
 function ch_sero_btn(i) {
@@ -452,54 +465,8 @@ function ch_sero_btn(i) {
     box[i][2] = box[i][3]; //폭에 고 넣음
     box[i][3] = d; //고에 폭 넣음
 
-    console.log("변경 후 box[i]", box[i]);
-    target_box.css("width", box[i][2]);
-    target_box.css("background", 'rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ')');
-    in_txt(i, target_box);
-    //박스 다시 계산
-    box_list_init();
     boxincontainer_init();
 };
-//장폭고 조절 후 내부 치수 변경
-function in_txt(i, par) {
-    var garosero_btn = "<span class='glyphicon glyphicon-resize-horizontal change_size' onclick='tooltip_triger_ho_btn(" + i + ");' box_idx='" + i + "'></span><span class='glyphicon glyphicon-resize-vertical change_size' onclick='tooltip_triger_ver_btn(" + i + ");' box_idx='" + i + "'></span><br/>";
-    //박스명 체크
-    var str = box[i][0];
-    if (box[i][0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
-        box[i][0] = box[i][0] + '<br/>';
-    }
-    //박스 200*200 이상이면 글씨 검장
-    if (box[i][1] >= 200 && box[i][2] >= 200) {
-
-        par.html(
-            //박스 정보
-            '<span  class="box_info" style="color:#000;"' +
-            //툴팁
-            'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단"> ' +
-            box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + box[i][5] + '단<span>');
-    } else {
-        //박스인포 내부 텍스트 단 저장
-        var d = par.children('.box_info').text();
-        d = d.split('단');
-        for (var j = 0; j < d.length; j++) {
-            d[j] = d[j].slice(d[j].length - 1);
-        }
-
-        //저장해서 배열로 만든 단 유지하여 박스인포 변경
-        for (var k = 0; k < d.length - 1; k++) {
-            console.log("d[k]", d[k]);
-            par.eq(k).html(
-                //박스 정보
-                '<span  class="box_info"' +
-                //툴팁
-                'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + d[k] + '단"> ' +
-                box[i][0] + box[i][1] + ' * ' + box[i][2] + ' * ' + box[i][3] + '<br/>' + d[k] + '단<span>');
-        }
-
-    }
-    all_init();
-
-}
 
 //박스 목록 위로 버튼
 function ch_up_btn(i) {
@@ -508,9 +475,7 @@ function ch_up_btn(i) {
         d = box[i - 1];
         box[i - 1] = box[i];
         box[i] = d;
-        console.log("실행");
-        //박스목록 다시 불러오기
-        box_list_init();
+
         //컨테이너 박스넣기 재실행
         boxincontainer_init();
     }
@@ -524,54 +489,7 @@ function ch_down_btn(i) {
         box[i + 1] = box[i];
         box[i] = d;
 
-        //박스목록 다시 불러오기
-        box_list_init();
         //컨테이너 박스넣기 재실행
         boxincontainer_init();
     }
 };
-
-function re_calc_box_array() {
-    for (var i = 0; i < box.length - 1; i++) {
-        //단수와 나머지 박스 계산
-        //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음
-        var dan = parseInt(container[2] / box[i][3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
-        if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if (box[i][9] != "0") { //다단적재가 0이 아니면 단수 다단적재로 강제 입력
-                dan = box[i][9];
-            }
-            if (box[i][4] > dan) { //최대 단수보다 수량이 많을때
-                box[i][6] = parseInt(box[i][4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
-                console.log("묶음 수", box[i][6]);
-                box[i][5] = dan; //단수 입력
-                box[i][7] = box[i][4] % dan; //묶음 나머지수
-                console.log("묶음 나머지 수", box[i][7]);
-
-            } else { //단수로 쌓을수 있으나 그보다 수량이 적거나 같을때
-                //단수 = 수량 (수량이 단수가 됨)
-                box[i][5] = box[i][4];
-                //단묶음수 = 1
-                box[i][6] = 1;
-            }
-
-            //박스리스트 가져오기
-            box_list_init();
-            //위치변경 안하고 박스 추가
-            //박스에 심어줄 인덱스
-            var idx = box.length - 1;
-            //루프돌며 박스 생성
-            //묶음 생성
-            for (var j = 0; j < box[i][6]; j++) { //단 묶음수길이만큼 돌림
-                boxincontainer(box[i], idx);
-            }
-            if (box[i][7] > 0) { //묶음 나머지가 있는 박스라면
-                //단을 나머지로 변경하여
-                box[i][5] = box[i][7];
-                //한번더 박스 추가
-                boxincontainer(box[i], idx);
-
-            }
-        }
-
-    }
-}
