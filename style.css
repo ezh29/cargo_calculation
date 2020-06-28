@@ -1,59 +1,27 @@
-        #boxlist {
-            list-style-type: none;
-            margin-top: 20px;
-            padding: 0;
-            width: 100%;
-        }
 
-        #boxlist li {
-            background-color: #fafafa;
-            color: #82949a;
-            margin-bottom: 7px;
-            padding: 10px;
-        }
+/*부트스트랩 기본 설정 변경 */
+.form-control {padding: 5px;text-align: center;display: inline-block !important;}
+.radio label {min-height: 25px;}
+.radio {  margin-top: 0px;     margin-bottom: 0px;}
+.panel {    margin-bottom: 5px;}
+.panel-heading {padding: 6px 10px;}
 
-        
-        .form-control {
-            padding: 5px;
-            text-align: center;
-            display: inline-block !important;
-        }
+/*컨테이너 박스*/
+#container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
 
-        .radio label {
-            min-height: 25px;
-        }
-
-        /*컨테이너 박스*/
-        #container {
-            background-color: #ddd;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            border-radius: 5px;
-        }
-
-
-        /*적재박스*/
-        .box {
-            border: 1px solid #333;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: move;
-        }
+/*적재박스*/
+.box {border: 1px solid #333;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
+border-radius: 5px;font-size: 12px;cursor: move;}
 /*박스 정보*/
 .box_info {cursor: pointer;}
 
-        /*박스리스트*/
-#boxlist li { border-left: 5px solid #82949a; cursor: move;}
+/*박스리스트*/
+ #boxlist {list-style-type: none;margin-top: 20px;padding: 0;width: 100%;}
+#boxlist li {background-color: #fafafa;color: #82949a;margin-bottom: 7px;padding: 10px;border-left: 5px solid #82949a; cursor: move;}
 #boxlist span {cursor: pointer; font-size: 20px; float: right;}
 #boxlist strong {display: inline-block; margin: 0 10px;}
-
-
+#boxlist .glyphicon.change_size {padding: 0 10px;}
+#boxlist .badge{font-size:12px; margin-right:3px;}
 /*박스 장폭, 폭고 전환 버튼*/
 .tooltip .glyphicon {font-size: 20px; padding: 20px;}
 .glyphicon{cursor: pointer;}
@@ -71,14 +39,6 @@
     top: initial;
 }
 */
-#boxlist .change_size {margin-right: 5px;}
-
-
-
 
 /*플로팅 버튼*/
-.btn_float{ width: 61px;
-    border-radius: 50%;
-    position: fixed;
-    right: 10px;
-    bottom: 10px; cursor: pointer;}
+.btn_float{ width: 61px;border-radius: 50%;position: fixed;right: 10px;bottom: 10px; cursor: pointer;}
