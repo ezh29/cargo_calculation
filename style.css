@@ -9,8 +9,8 @@ body{font-size: 12px;}
 .panel-heading {padding: 6px 10px;}
 .panel-body {padding: 10px;}
 .form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
-input[type='text'] {height: 20px !important;width: 68px !important}
-input::placeholder {font-size: 10px; !important;}
+input[type='text'] {height: 25px !important;width: 68px !important}
+input::placeholder {font-size: 12px; !important;}
 button {font-size: 12px !important; padding: 5px !important;}
 input[type=checkbox], input[type=radio] {margin: 0;}
 /*박스 겹침시 경고 레드*/
@@ -18,17 +18,17 @@ input[type=checkbox], input[type=radio] {margin: 0;}
 
 /*입력 박스*/
 #input_area {width: 500px;float: left; padding: 0 20px}
-#container_area_wrap {margin-left: 480px;}
+#container_area_wrap {margin-left: 480px; }
 label span {width: 64px;display: inline-block;}
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
-
+#container_area{display: flex;align-items: center;flex-direction: column;background: url(img/bg_ruler.png) no-repeat top left,url(img/bg_ruler.png) no-repeat top right; background-position: left 20px, right 20px;}
 /*적재박스*/
 .box {border: 1px solid #333;box-sizing: border-box;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
 border-radius: 5px;font-size: 12px;cursor: move;}
 .box_inner {display: flex;    align-items: center;    text-align: center;    justify-content: center;}
 /*박스 정보*/
-.box_info {cursor: pointer; line-height: 1; width: 100%;word-break:break-all;}
+.box_info {cursor: pointer; line-height: 1; width: 90%;word-break:break-all;}
 
 /*박스리스트*/
  #boxlist {list-style-type: none;padding: 0;width: 100%;}

@@ -10,7 +10,7 @@ all_init();
 var container = [960, 240, 240]; //기본 사이즈 11톤
 $('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
 //컨테이너 너비 생성
-$('#container_area').css("width", container[1] + 40);
+$('#container_area').css("width", container[1] + 120);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
 //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]다단적재
 
@@ -22,7 +22,7 @@ $("input:radio[name=container_size]").click(function () {
     function container_css(radioVal) {
         $('#container').css("height", container[0]);
         $('#container').css("width", container[1]);
-        $('#container_area').css("width", container[1] + 40);
+        $('#container_area').css("width", container[1] + 120);
         $('.container_info').html(radioVal + " " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
     }
     switch (radioVal) {
@@ -73,6 +73,7 @@ $("input:radio[name=container_size]").click(function () {
                 container[1] = Number(val);
                 $('#container').css("width", val);
                 $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+                $('#container_area').css("width", container[1] + 120);
             });
             $("#container_size_3").keyup(function () { //고
                 var val = $(this).val();
@@ -198,6 +199,8 @@ function tooltip_start() {
     $('[data-toggle="tooltip"]').tooltip({
         trigger: 'click',
         //delay: { "show": 0, "hide": 1500 }
+        container:'#container_area',
+        
     });
     $('#container_area')
         .on('mouseleave focusout', function () {
