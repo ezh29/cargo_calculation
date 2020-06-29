@@ -179,6 +179,7 @@ function drag_start() {
     });
     $( ".box_inner" ).droppable({
       drop: function( event, ui ) {
+          $( this ).removeClass( "bg_red" );
         $( this )
           .addClass( "ui-state-highlight" )
             .addClass( "bg_red" );
@@ -343,7 +344,7 @@ function boxincontainer(new_box, idx, dan) {
         tooltip_dan = '<br/>최대단수 '+new_box[9]+'단';
     }
     
-    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] -2) + 'px; height:' + (new_box[1] -2)+ 'px;>' +
+    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] -2) + 'px; height:' + (new_box[1] -2)+ 'px;">' +
         //박스 정보
         '<span  class="box_info"' +
         //툴팁
