@@ -167,8 +167,28 @@ $("#togle_btn3").on("click", function () {
 function drag_start() {
     $(function () {
         $(".box").draggable({
-            snap: ".box,#container"
+            snap: ".box,#container",
+            containment:"document",
+            cursor:"crosshair",
+            delay:200,
+            opacity:0.5,
+            zIndex: 100,
+            stack: ".box"
+            
         });
+    });
+    $( ".box_inner" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+            .addClass( "bg_red" );
+      },
+        out: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+            .removeClass( "bg_red" );
+      },
+        tolerance:"touch",
     });
 }
 //툴팁 시작
@@ -323,12 +343,12 @@ function boxincontainer(new_box, idx, dan) {
         tooltip_dan = '<br/>최대단수 '+new_box[9]+'단';
     }
     
-    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '">' +
+    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] -2) + 'px; height:' + (new_box[1] -2)+ 'px;>' +
         //박스 정보
         '<span  class="box_info"' +
         //툴팁
         'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단'+tooltip_dan+'"> ' +
-        box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div>';
+        box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div></div>';
     $('#container').append(box_html);
     all_init();
 }

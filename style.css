@@ -9,12 +9,16 @@
 .form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
 input[type='text'] {height: 30px !important;}
 
+/*박스 겹침시 경고 레드*/
+.bg_red {background: red !important;}
+
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
 
 /*적재박스*/
-.box {border: 1px solid #333;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
+.box {border: 1px solid #333;box-sizing: border-box;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
 border-radius: 5px;font-size: 12px;cursor: move;}
+.box_inner {display: flex;    align-items: center;    text-align: center;    justify-content: center;}
 /*박스 정보*/
 .box_info {cursor: pointer; line-height: 1; width: 100%;word-break:break-all;}
 
