@@ -12,7 +12,7 @@ $('.container_info1').html("11톤 " + container[0] + ' * ' + container[1] + ' * 
 //컨테이너 너비 생성
 $('#container_area').css("width", container[1] + 120);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
-//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]다단적재
+//  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음, [9]다단적재 [10]CBM
 
 var box = [];
 //컨데이너 사이즈 체크
@@ -364,6 +364,8 @@ function boxincontainer(new_box, idx, dan) {
 //박스 리스트 가져오기
 function box_list_init() {
     $('#boxlist').empty(); //박스리스트 초기화
+    var all_CBM = 0;
+    
     for (var i = 0; i < box.length; i++) {
         var dansu = '<span class="badge"> ' + box[i][9] + '단</span>';
         var box_name = "";
@@ -381,6 +383,7 @@ function box_list_init() {
         //#boxlist에 넣기
         var CBM = (box[i][1] * 0.01) * (box[i][2] * 0.01) * (box[i][3] * 0.01) * box[i][4];
         CBM = Math.floor(CBM * 100) / 100;
+        all_CBM = all_CBM + CBM;
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             box_name + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 ' +
             //그룹
@@ -401,7 +404,8 @@ function box_list_init() {
             '</li>';
         $('#boxlist').append(append);
     }
-
+    $('.all_cbm').html('총 '+all_CBM+' CBM');
+    console.log("all_CBM",all_CBM);
     all_init();
 }
 //박스 삭제
@@ -650,7 +654,7 @@ function get_boxs_heigth() {
     console.log("full", full_height, full_width, box_height[0]);
 
 
-    $('.container_info2').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0]);
+    $('.full_box').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0]);
 
 }
 //밖으로 나가는 배열 제거
