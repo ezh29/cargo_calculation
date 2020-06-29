@@ -86,25 +86,48 @@ $("input:radio[name=container_size]").click(function () {
             //위의 값 A~E 모두 아닐때 실행할 명령문;
     }
 });
-//박스 추가 벨리데이션
+
+//박스 입력 벨리데이션
 $("#box_val_2").keyup(function () {
     var val = $(this).val();
     if (val > container[0]) {
         alert("컨테이너를 초과하는 장입니다.");
+        $(this).val(null);
     }
 });
 $("#box_val_3").keyup(function () {
     var val = $(this).val();
     if (val > container[1]) {
         alert("컨테이너를 초과하는 폭입니다.");
+        $(this).val(null);
     }
 });
 $("#box_val_4").keyup(function () {
     var val = $(this).val();
     if (val > container[2]) {
         alert("컨테이너를 초과하는 고입니다.");
+        $(this).val(null);
     }
 });
+$("#box_val_4").keyup(function () {
+    var val = $(this).val();
+    if (val > container[2]) {
+        alert("컨테이너를 초과하는 고입니다.");
+        $(this).val(null);
+    }
+});
+$("#box_val_6, #box_val_4").keyup(function () {
+    var val_1 = $('#box_val_4').val(); //고
+    var val_2 = $('#box_val_6').val(); //최대단수
+    //console.log((val_1*val_2),container[2]);
+    if ((val_1 * val_2) > container[2]) {
+        alert("최대단수*박스 높이가 컨테이너 높이를 초과합니다.");
+        $(this).val(null);
+    }
+});
+
+
+
 
 //소터블(박스목록 드래그)
 $("#boxlist").sortable({
@@ -156,10 +179,10 @@ function tooltip_start() {
         trigger: 'click',
         //delay: { "show": 0, "hide": 1500 }
     });
-        $('#container_area')
-            .on('mouseleave focusout', function () {
-                $('.box_info').tooltip('hide');
-            });
+    $('#container_area')
+        .on('mouseleave focusout', function () {
+            $('.box_info').tooltip('hide');
+        });
 }
 
 //툴팁 장폭고 버튼 트리거
@@ -198,16 +221,16 @@ function addBoxValue_btn() {
         alert("컨테이너를 초과하는 폭입니다.");
     } else if (new_box[3] > container[2]) {
         alert("컨테이너를 초과하는 고입니다.");
-    } else if((new_box[9]*new_box[3])>container[2]){
-        alert("최대단수*박스 높이가 컨테이너 높이를 초과합니다.");  
-              }else{
+    } else if ((new_box[9] * new_box[3]) > container[2]) {
+        alert("최대단수*박스 높이가 컨테이너 높이를 초과합니다.");
+    } else {
         //단수와 나머지 박스 계산
         //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음
         var dan = parseInt(container[2] / new_box[3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if (new_box[9] != "0" ) { //다단적재가 0이 아니고, 높이 *최대단수가 컨테이너 높이보다 작으면 단을 최대단수로 입력
+            if (new_box[9] != "0") { //다단적재가 0이 아니고, 높이 *최대단수가 컨테이너 높이보다 작으면 단을 최대단수로 입력
                 dan = new_box[9];
-                console.log((new_box[9]*new_box[3])<container[2]);
+                console.log((new_box[9] * new_box[3]) < container[2]);
             }
             if (new_box[4] > dan) { //최대 단수보다 수량이 많을때
                 new_box[6] = parseInt(new_box[4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
@@ -316,8 +339,8 @@ function box_list_init() {
         }
 
         //#boxlist에 넣기
-        var CBM = (box[i][1]*0.01) * (box[i][2]*0.01)* (box[i][3]*0.01) * box[i][4];
-        CBM = Math.floor(CBM*100)/100;
+        var CBM = (box[i][1] * 0.01) * (box[i][2] * 0.01) * (box[i][3] * 0.01) * box[i][4];
+        CBM = Math.floor(CBM * 100) / 100;
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             //삭제버튼
             '<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="box_list_delet_btn(' + i + ')"></span> ' +
@@ -327,10 +350,10 @@ function box_list_init() {
             //위아래 버튼
             '<span class="glyphicon glyphicon-triangle-bottom change_size" aria-hidden="true" onclick="ch_down_btn(' + i + ');"></span>' +
             '<span class="glyphicon glyphicon-triangle-top change_size" aria-hidden="true" onclick="ch_up_btn(' + i + ');"></span>' +
-            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 '  +
+            box[i][0] + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 ' +
             //단수 뱃지
             dansu +
-            '<span class="badge"> ' + CBM + 'CBM</span>'+
+            '<span class="badge"> ' + CBM + 'CBM</span>' +
             '</li>';
         $('#boxlist').append(append);
     }

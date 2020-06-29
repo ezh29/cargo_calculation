@@ -142,7 +142,9 @@ function addBoxValue() {
         alert("컨테이너를 초과하는 폭입니다.");
     } else if (new_box[3] > container[2]) {
         alert("컨테이너를 초과하는 고입니다.");
-    } else {
+    } else if ((new_box[9] * new_box[3]) > container[2]) {
+        alert("최대단수*박스 높이가 컨테이너 높이를 초과합니다.");
+    } else  {
         //단수와 나머지 박스 계산
         //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음
         var dan = parseInt(container[2] / new_box[3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
