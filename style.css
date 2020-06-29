@@ -1,16 +1,20 @@
 
 /*부트스트랩 기본 설정 변경 */
+body{font-size: 12px;}
 .form-control {padding: 5px;text-align: center;display: inline-block !important;}
 .radio label {min-height: 25px;}
 .radio {  margin-top: 0px;     margin-bottom: 0px;}
 .panel {    margin-bottom: 5px;}
+.panel-title {font-size: 12px;}
 .panel-heading {padding: 6px 10px;}
 .panel-body {padding: 10px;}
 .form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
-input[type='text'] {height: 30px !important;}
-
+input[type='text'] {height: 20px !important;}
+input::placeholder {font-size: 10px; !important;}
+button {font-size: 12px !important; padding: 5px !important;}
+input[type=checkbox], input[type=radio] {margin: 0;}
 /*박스 겹침시 경고 레드*/
-.bg_red {background: red !important;}
+.bg_red {background: red !important;padding: 3px !important;}
 
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
