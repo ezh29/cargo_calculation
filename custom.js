@@ -178,7 +178,7 @@ function tooltip_triger_ver_btn(idx) {
 function addBoxValue_btn() {
     var new_box = [];
 
-    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음,[9]다단적재
+    //[0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음,[9]최대단수 설정
     new_box[0] = $('#box_val_1').val(); //박스이름
     new_box[1] = Number($('#box_val_2').val()); //장
     new_box[2] = Number($('#box_val_3').val()); //폭
@@ -188,7 +188,7 @@ function addBoxValue_btn() {
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
 
-    new_box[9] = Number($('#box_val_6').val()); //설정 다단적재
+    new_box[9] = Number($('#box_val_6').val()); //최대단수 설정
 
     if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
@@ -198,13 +198,16 @@ function addBoxValue_btn() {
         alert("컨테이너를 초과하는 폭입니다.");
     } else if (new_box[3] > container[2]) {
         alert("컨테이너를 초과하는 고입니다.");
-    } else {
+    } else if((new_box[9]*new_box[3])>container[2]){
+        alert("최대단수*박스 높이가 컨테이너 높이를 초과합니다.");  
+              }else{
         //단수와 나머지 박스 계산
         //  [0]박스이름,  [1]장,  [2]폭,   [3]고, [4]수량,[5]단, [6]단 묶음수 , [7]묶음 나머지,[8] 비었음
         var dan = parseInt(container[2] / new_box[3]); //컨테이너 높이 나누기 물건 높이 = 최대 단수
         if (dan >= 1) { //1단 이상으로 쌓을수 있을때 = 적재가능
-            if (new_box[9] != "0") { //다단적재가 0이 아니면 단수 다단적재로 강제 입력
+            if (new_box[9] != "0" ) { //다단적재가 0이 아니고, 높이 *최대단수가 컨테이너 높이보다 작으면 단을 최대단수로 입력
                 dan = new_box[9];
+                console.log((new_box[9]*new_box[3])<container[2]);
             }
             if (new_box[4] > dan) { //최대 단수보다 수량이 많을때
                 new_box[6] = parseInt(new_box[4] / dan); //수량을 단으로 나눔 = 묶음 수 (표시되는 상자 수)
