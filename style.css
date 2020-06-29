@@ -9,7 +9,7 @@ body{font-size: 12px;}
 .panel-heading {padding: 6px 10px;}
 .panel-body {padding: 10px;}
 .form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
-input[type='text'] {height: 25px !important;width: 68px !important}
+input[type='text'], input[type='tel'] {height: 25px !important;width: 68px !important}
 input::placeholder {font-size: 12px; !important;}
 button {font-size: 12px !important; padding: 5px !important;}
 input[type=checkbox], input[type=radio] {margin: 0;}
