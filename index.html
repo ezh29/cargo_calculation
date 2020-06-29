@@ -3,7 +3,7 @@
 
 <head>
     <title>적재 계산기</title>
-    
+
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,9 +82,9 @@
                             </div>
                         </form>
                     </div>
-<!--                    <hr />-->
+                    <!--                    <hr />-->
                     <!--                    적재함 사이즈-->
-<!--                    <div class="well" style="text-align: center; margin-bottom: 0;"> <span class="container_info" style="font-weight: bold;"></span></div>-->
+                    <!--                    <div class="well" style="text-align: center; margin-bottom: 0;"> <span class="container_info" style="font-weight: bold;"></span></div>-->
                 </div>
             </div>
             <div class="panel panel-primary all_toggle_body">
@@ -95,9 +95,12 @@
                     <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
                         <div class="form-group">
                             <span style="margin-right: 10px;">박스명 </span>
-                            <input style="width: 140px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="00무역">
+                            <input style="width: 100px; margin-right:10px" type="text" class="form-control" id="box_val_1" placeholder="">
                             <span style="margin-right: 10px;">최대단수 설정 </span>
                             <input style="width: 50px; margin-right:5px" type="text" class="form-control" id="box_val_6" placeholder="0" value="1"> 단
+                            <label class="checkbox-inline" style="margin-left: 10px;">
+                                <input type="checkbox" id="chk_no_dan" value="option1"> 단수 사용 안함
+                            </label>
                         </div>
                     </form>
                     <form class="form-inline" style="display: inline-block; width:100%; margin-bottom: 20px;">
@@ -117,7 +120,7 @@
                         <button type="button" onclick="start_bubbleSort2_btn();" class="btn btn-default btn-block" style="width: 24%;margin-top: 10px;display: inline-block;float: left;margin-right: 1%;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 세로 少</button>
                         <button type="button" onclick="start_bubbleSort1_2_btn();" class="btn btn-default btn-block" style="width: 24%;margin-top: 10px;display: inline-block;float: left;margin-right: 1%;"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> 가로 太</button>
                         <button type="button" onclick="start_bubbleSort2_2_btn();" class="btn btn-default btn-block" style="width: 24%;margin-top: 10px;display: inline-block;float: left;"><span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span> 세로 太</button>
-                        
+
                     </div>
                 </div>
             </div>

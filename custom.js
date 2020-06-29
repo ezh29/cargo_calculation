@@ -125,8 +125,14 @@ $("#box_val_6, #box_val_4").keyup(function () {
         $(this).val(null);
     }
 });
-
-
+// 최대단수 사용안함 체크여부 확인
+$("#chk_no_dan").change(function () {
+    if ($("#chk_no_dan").is(":checked")) {
+        $('#box_val_6').css("color", "#ddd");
+    } else {
+        $('#box_val_6').css("color", "#000");
+    }
+});
 
 
 //소터블(박스목록 드래그)
@@ -211,7 +217,11 @@ function addBoxValue_btn() {
     new_box[6] = 1; //기본값 설정
     new_box[7] = 0; //기본값 설정
 
-    new_box[9] = Number($('#box_val_6').val()); //최대단수 설정
+    if ($("#chk_no_dan").is(":checked")) {
+        new_box[9] = 0;
+    } else {
+        new_box[9] = Number($('#box_val_6').val()); //최대단수 설정
+    }
 
     if (new_box[1] == "" || new_box[2] == "" || new_box[3] == "" || new_box[4] == "") {
         alert('장폭고, 수량을 다 입력해주세요.');
