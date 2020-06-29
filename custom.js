@@ -8,7 +8,7 @@ function all_init() {
 all_init();
 
 var container = [960, 240, 240]; //기본 사이즈 11톤
-$('.container_info').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+$('.container_info1').html("11톤 " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
 //컨테이너 너비 생성
 $('#container_area').css("width", container[1] + 120);
 $('#container_area').append('<div id="container" style="width:' + container[1] + 'px; height:' + container[0] + 'px; "></div>');
@@ -23,7 +23,7 @@ $("input:radio[name=container_size]").click(function () {
         $('#container').css("height", container[0]);
         $('#container').css("width", container[1]);
         $('#container_area').css("width", container[1] + 120);
-        $('.container_info').html(radioVal + " " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
+        $('.container_info1').html(radioVal + " " + container[0] + ' * ' + container[1] + ' * ' + container[2]);
     }
     switch (radioVal) {
         case "option1": //1톤 트럭 260*160*160
@@ -57,7 +57,7 @@ $("input:radio[name=container_size]").click(function () {
             container[2] = Number($("#container_size_3").val());
             $('#container').css("height", container[0]);
             $('#container').css("width", container[1]);
-            $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+            $('.container_info1').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             //console.log(container);
 
             $("#container_size_1").keyup(function () { //장
@@ -65,14 +65,14 @@ $("input:radio[name=container_size]").click(function () {
                 //console.log("val", val);
                 container[0] = Number(val);
                 $('#container').css("height", val);
-                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+                $('.container_info1').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             });
             $("#container_size_2").keyup(function () { //폭
                 var val = $(this).val();
                 //console.log("val", val);
                 container[1] = Number(val);
                 $('#container').css("width", val);
-                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+                $('.container_info1').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
                 $('#container_area').css("width", container[1] + 120);
             });
             $("#container_size_3").keyup(function () { //고
@@ -80,7 +80,7 @@ $("input:radio[name=container_size]").click(function () {
                 //console.log("val", val);
                 container[2] = Number(val);
                 console.log('container', container);
-                $('.container_info').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
+                $('.container_info1').html(container[0] + ' * ' + container[1] + ' * ' + container[2]);
             });
             break;
         default:
@@ -169,28 +169,31 @@ function drag_start() {
     $(function () {
         $(".box").draggable({
             snap: ".box,#container",
-            containment:"document",
-            cursor:"crosshair",
-            delay:200,
-            opacity:0.5,
+            containment: "document",
+            cursor: "crosshair",
+            delay: 200,
+            opacity: 0.5,
             zIndex: 100,
-            stack: ".box"
-            
+            stack: ".box",
+            stop: function () {
+                get_boxs_heigth();
+            }
+
         });
     });
-    $( ".box_inner" ).droppable({
-      drop: function( event, ui ) {
-          $( this ).removeClass( "bg_red" );
-        $( this )
-          .addClass( "ui-state-highlight" )
-            .addClass( "bg_red" );
-      },
-        out: function( event, ui ) {
-        $( this )
-          .addClass( "ui-state-highlight" )
-            .removeClass( "bg_red" );
-      },
-        tolerance:"touch",
+    $(".box_inner").droppable({
+        drop: function (event, ui) {
+            $(this).removeClass("bg_red");
+            $(this)
+                .addClass("ui-state-highlight")
+                .addClass("bg_red");
+        },
+        out: function (event, ui) {
+            $(this)
+                .addClass("ui-state-highlight")
+                .removeClass("bg_red");
+        },
+        tolerance: "touch",
     });
 }
 //툴팁 시작
@@ -199,8 +202,8 @@ function tooltip_start() {
     $('[data-toggle="tooltip"]').tooltip({
         trigger: 'click',
         //delay: { "show": 0, "hide": 1500 }
-        container:'#container_area',
-        
+        container: '#container_area',
+
     });
     $('#container_area')
         .on('mouseleave focusout', function () {
@@ -333,28 +336,29 @@ function boxincontainer(new_box, idx, dan) {
     if (new_box[0] != "") {
         box_name_in_box = new_box[0] + '<br/>';
     }
-    var in_css ="";
+    var in_css = "";
     var tooltip_dan = "";
-    
+
     if (new_box[1] >= 200 && new_box[2] >= 200) {
-            //박스 200*200 이상이면 글씨 검정
+        //박스 200*200 이상이면 글씨 검정
         in_css = in_css + "color:#333;";
-    } 
-    if(new_box[9] == 0){ //최대단수 설정 안하면
-        in_css = in_css + "border:1px solid #fff;";
-    } else{
-        //최대단수 설정했으면 툴팁에 최대단수 표시
-        tooltip_dan = '<br/>최대단수 '+new_box[9]+'단';
     }
-    
-    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] -2) + 'px; height:' + (new_box[1] -2)+ 'px;">' +
+    if (new_box[9] == 0) { //최대단수 설정 안하면
+        in_css = in_css + "border:1px solid #fff;";
+    } else {
+        //최대단수 설정했으면 툴팁에 최대단수 표시
+        tooltip_dan = '<br/>최대단수 ' + new_box[9] + '단';
+    }
+
+    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ');' + in_css + '" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] - 2) + 'px; height:' + (new_box[1] - 2) + 'px;">' +
         //박스 정보
         '<span  class="box_info"' +
         //툴팁
-        'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단'+tooltip_dan+'"> ' +
+        'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단' + tooltip_dan + '"> ' +
         box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div></div>';
     $('#container').append(box_html);
     all_init();
+    get_boxs_heigth();
 }
 
 //박스 리스트 가져오기
@@ -563,3 +567,112 @@ function ch_down_btn(i) {
         boxincontainer_init();
     }
 };
+//박스 위치 길이, 너비 구하기
+function get_boxs_heigth() {
+    var box_position = [];
+    var start = $('#container').position();
+    //자식들 복사
+    var boxs = $('#container').children();
+    for (var i = 0; i < boxs.length; i++) {
+        //자식 위치와 높이 너비 객체배열화
+        box_position[i] = boxs.eq(i).position();
+        box_position[i].height = boxs.eq(i).height();
+        box_position[i].width = boxs.eq(i).width();
+    }
+
+    //객체 복사
+    var box_position_width = box_position.slice();
+    var box_position_height = box_position.slice();
+
+    //너비 큰순으로 정렬
+    var length = box_position_width.length;
+    var i, j, temp;
+    //폭 비교
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (box_position_width[j].left < box_position_width[j + 1].left) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+                temp = box_position_width[j]; // 두 수를 서로 바꿔준다
+                box_position_width[j] = box_position_width[j + 1];
+                box_position_width[j + 1] = temp;
+            }
+        }
+    }
+    console.log("너비 큰순 정렬", box_position_width);
+
+    //밖으로 나간거 제외
+    array_out(box_position_width,start);
+
+    //높이 큰순으로 정렬
+    var length = box_position_height.length;
+    var i, j, temp;
+    //폭 비교
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (box_position_height[j].top < box_position_height[j + 1].top) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+                temp = box_position_height[j]; // 두 수를 서로 바꿔준다
+                box_position_height[j] = box_position_height[j + 1];
+                box_position_height[j + 1] = temp;
+            }
+        }
+    }
+    console.log("높이 큰순 정렬", box_position_height);
+
+    //밖으로 나간거 제외
+    array_out(box_position_height,start);
+
+    //가장 높은 고 구하기 [6]*높이
+    var box_height = [];
+    for (i = 0; i < box.length; i++) {
+        box_height[i] = box[i][3] * box[i][5];
+    }
+    var length = box_height.length;
+    var i, j, temp;
+    for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+        for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (box_height[j] < box_height[j + 1]) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+                temp = box_height[j]; // 두 수를 서로 바꿔준다
+                box_height[j] = box_height[j + 1];
+                box_height[j + 1] = temp;
+            }
+        }
+    }
+  
+    //너비 높이는 가장 먼 박스 - 가장 가까운 박스 + 박스 너비or높이 +2(보더 너비)
+    full_width = box_position_width[0].left - box_position_width[box_position_width.length -1].left + box_position_width[0].width + 2;
+    //소수점 반올림
+    full_width = Math.floor(full_width * 100) / 100;
+    
+    full_height = box_position_height[0].top - box_position_height[box_position_height.length -1].top + box_position_height[0].height + 2;
+    full_height = Math.floor(full_height * 100) / 100;
+
+    
+    console.log("box_position", box_position);
+    console.log("full", full_height, full_width, box_height[0]);
+
+
+    $('.container_info2').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0]);
+
+}
+//밖으로 나가는 배열 제거
+function array_out(array,start){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].left > (start.left + container[1] - array[i].width)) {
+            array.splice(i, 1);
+        }
+        if (array[i].left < start.left) {
+            array.splice(i, 1);
+        }
+    }
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].top > (start.top + container[0] - array[i].height)) {
+            array.splice(i, 1);
+        }
+        if (array[i].top < start.top) {
+            array.splice(i, 1);
+        }
+    }
+    
+    
+}
+
+
