@@ -13,16 +13,18 @@
 .box {border: 1px solid #333;color: #fff;display: flex;align-items: center;text-align: center;justify-content: center;
 border-radius: 5px;font-size: 12px;cursor: move;}
 /*박스 정보*/
-.box_info {cursor: pointer; line-height: 1;}
+.box_info {cursor: pointer; line-height: 1; width: 100%;word-break:break-all;}
 
 /*박스리스트*/
- #boxlist {list-style-type: none;margin-top: 20px;padding: 0;width: 100%;}
+ #boxlist {list-style-type: none;padding: 0;width: 100%;}
 #boxlist li {background-color: #fafafa;color: #82949a;margin-bottom: 7px;padding: 10px;border-left: 5px solid #82949a; cursor: move;}
-#boxlist span {cursor: pointer; font-size: 20px; float: right;}
-#boxlist strong {display: inline-block; margin: 0 10px;}
+#boxlist .list_btn_group{float: right; display: flex;}
+#boxlist span {cursor: pointer; font-size: 20px; }
+#boxlist strong {display: inline-block; margin-right: 10px;}
 #boxlist .glyphicon.change_size {padding: 0 10px;}
-#boxlist .badge{font-size:12px; margin-right:3px;}
+#boxlist .badge{font-size:12px; margin-right:3px;padding-top: 4px;}
 /*박스 장폭, 폭고 전환 버튼*/
+.tooltip{word-break:break-all;}
 .tooltip .glyphicon {font-size: 20px; padding: 20px;}
 .glyphicon{cursor: pointer;}
 .box .glyphicon.change_size {padding: 5px;    cursor: pointer; }
