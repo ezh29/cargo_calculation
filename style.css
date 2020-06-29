@@ -5,6 +5,8 @@
 .radio {  margin-top: 0px;     margin-bottom: 0px;}
 .panel {    margin-bottom: 5px;}
 .panel-heading {padding: 6px 10px;}
+.panel-body {padding: 10px;}
+.form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
 
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
