@@ -304,28 +304,32 @@ function boxincontainer_init() {
 function boxincontainer(new_box, idx, dan) {
     var garosero_btn = "<span class='glyphicon glyphicon-resize-horizontal change_size' onclick='tooltip_triger_ho_btn(" + idx + ");' box_idx='" + idx + "'></span><span class='glyphicon glyphicon-resize-vertical change_size' onclick='tooltip_triger_ver_btn(" + idx + ");' box_idx='" + idx + "'></span><br/>";
     //박스명 체크
-    var str = new_box[0];
-    var box_name_in_box ="";
-    if (new_box[0] != "" && str.substring(str.length - 5, str.length) != "<br/>") {
+    var box_name_in_box = "";
+    //박스 이름 있으면 <br/>추가
+    if (new_box[0] != "") {
         box_name_in_box = new_box[0] + '<br/>';
     }
-    //박스 200*200 이상이면 글씨 검장
+    var in_css ="";
+    var tooltip_dan = "";
+    
     if (new_box[1] >= 200 && new_box[2] >= 200) {
-        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '"> ' +
-            //박스 정보
-            '<span  class="box_info" style="color:#000;"' +
-            //툴팁
-            'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단"> ' +
-            box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span>' +
-            '</div>');
-    } else {
-        $('#container').append('<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ')" box_idx="' + idx + '">' +
-            //박스 정보
-            '<span  class="box_info"' +
-            //툴팁
-            'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단"> ' +
-            box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div>');
+            //박스 200*200 이상이면 글씨 검정
+        in_css = in_css + "color:#333;";
+    } 
+    if(new_box[9] == 0){ //최대단수 설정 안하면
+        in_css = in_css + "border:1px solid #fff;";
+    } else{
+        //최대단수 설정했으면 툴팁에 최대단수 표시
+        tooltip_dan = '<br/>최대단수 '+new_box[9]+'단';
     }
+    
+    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' +      new_box[2] + ',' + new_box[3] + ');'+ in_css +'" box_idx="' + idx + '">' +
+        //박스 정보
+        '<span  class="box_info"' +
+        //툴팁
+        'data-toggle="tooltip" data-html="true" data-placement="left" title="' + garosero_btn + box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단'+tooltip_dan+'"> ' +
+        box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div>';
+    $('#container').append(box_html);
     all_init();
 }
 
@@ -352,19 +356,19 @@ function box_list_init() {
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             box_name + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 ' +
             //그룹
-            '<div class="list_btn_group">'+
-                //단수 뱃지
-                dansu +
-                //CBM
-                '<span class="badge"> ' + CBM + 'CBM</span>'+
-                //위아래 버튼
-                '<span class="glyphicon glyphicon-triangle-top change_size" aria-hidden="true" onclick="ch_up_btn(' + i + ');"></span>' +            
-                '<span class="glyphicon glyphicon-triangle-bottom change_size" aria-hidden="true" onclick="ch_down_btn(' + i + ');"></span>' +
-                //장폭고 버튼
-                '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"onclick="ch_garo_btn(' + i + ');"></span>' +
-                '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true" onclick="ch_sero_btn(' + i + ');"></span>' +
-                //삭제버튼
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="box_list_delet_btn(' + i + ')"></span> ' +
+            '<div class="list_btn_group">' +
+            //단수 뱃지
+            dansu +
+            //CBM
+            '<span class="badge"> ' + CBM + 'CBM</span>' +
+            //위아래 버튼
+            '<span class="glyphicon glyphicon-triangle-top change_size" aria-hidden="true" onclick="ch_up_btn(' + i + ');"></span>' +
+            '<span class="glyphicon glyphicon-triangle-bottom change_size" aria-hidden="true" onclick="ch_down_btn(' + i + ');"></span>' +
+            //장폭고 버튼
+            '<span class="glyphicon glyphicon-resize-horizontal change_size" aria-hidden="true"onclick="ch_garo_btn(' + i + ');"></span>' +
+            '<span class="glyphicon glyphicon-resize-vertical change_size" aria-hidden="true" onclick="ch_sero_btn(' + i + ');"></span>' +
+            //삭제버튼
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="box_list_delet_btn(' + i + ')"></span> ' +
             '</div>' +
             '</li>';
         $('#boxlist').append(append);
