@@ -577,13 +577,17 @@ function ch_down_btn(i) {
 function get_boxs_heigth() {
     var box_position = [];
     var start = $('#container').position();
+    console.log("start ", start, "bottom",(start.top + container[0]), "right",(start.left + container[0]));
     //자식들 복사
     var boxs = $('#container').children();
     for (var i = 0; i < boxs.length; i++) {
         //자식 위치와 높이 너비 객체배열화
         box_position[i] = boxs.eq(i).position();
-        box_position[i].height = boxs.eq(i).height();
-        box_position[i].width = boxs.eq(i).width();
+        box_position[i].height = boxs.eq(i).height() + 2;
+        box_position[i].width = boxs.eq(i).width()+ 2;
+        box_position[i].bottom = box_position[i].top + box_position[i].height;
+        box_position[i].right = box_position[i].left + box_position[i].width;
+
     }
 
     //객체 복사
@@ -596,7 +600,7 @@ function get_boxs_heigth() {
     //폭 비교
     for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
         for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
-            if (box_position_width[j].left < box_position_width[j + 1].left) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+            if (box_position_width[j].right < box_position_width[j + 1].right) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
                 temp = box_position_width[j]; // 두 수를 서로 바꿔준다
                 box_position_width[j] = box_position_width[j + 1];
                 box_position_width[j + 1] = temp;
@@ -607,6 +611,8 @@ function get_boxs_heigth() {
 
     //밖으로 나간거 제외
     array_out(box_position_width, start);
+    console.log("너비 큰순 정렬2", box_position_width);
+
 
     //높이 큰순으로 정렬
     var length = box_position_height.length;
@@ -614,7 +620,7 @@ function get_boxs_heigth() {
     //폭 비교
     for (i = 0; i < length - 1; i++) { // 순차적으로 비교하기 위한 반복문
         for (j = 0; j < length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
-            if (box_position_height[j].top < box_position_height[j + 1].top) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
+            if (box_position_height[j].bottom < box_position_height[j + 1].bottom) { // 두 수를 비교하여 앞 수가 뒷 수보다 작으면
                 temp = box_position_height[j]; // 두 수를 서로 바꿔준다
                 box_position_height[j] = box_position_height[j + 1];
                 box_position_height[j + 1] = temp;
@@ -625,6 +631,8 @@ function get_boxs_heigth() {
 
     //밖으로 나간거 제외
     array_out(box_position_height, start);
+    console.log("높이 큰순 정렬2", box_position_height);
+
 
     //가장 높은 고 구하기 [6]*높이
     var box_height = [];
@@ -643,47 +651,46 @@ function get_boxs_heigth() {
         }
     }
 
-    //너비 높이는 가장 먼 박스 - 가장 가까운 박스 + 박스 너비or높이 +2(보더 너비)
-    full_width = box_position_width[0].left - box_position_width[box_position_width.length - 1].left + box_position_width[0].width + 2;
+    console.log("box_position", box_position);
+
+    //너비 높이는 맨 오른쪽 - 맨 왼쪽 
+    full_width = box_position_width[0].right - box_position_width[box_position_width.length - 1].left;
     //소수점 반올림
     full_width = Math.floor(full_width * 100) / 100;
 
-    full_height = box_position_height[0].top - box_position_height[box_position_height.length - 1].top + box_position_height[0].height + 2;
+    full_height = box_position_height[0].bottom - box_position_height[box_position_height.length - 1].top;
     full_height = Math.floor(full_height * 100) / 100;
 
 
-    console.log("box_position", box_position);
     console.log("full", full_height, full_width, box_height[0]);
 
 
-    $('.full_box').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0] + ' = ' + numberWithCommas((full_height * full_width * box_height[0])/100)+"㎥");
+    $('.full_box').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0] + ' = ' + numberWithCommas((full_height * full_width * box_height[0]) / 100) + "㎥");
 
 }
 //밖으로 나가는 배열 제거
 function array_out(array, start) {
+
+
     for (var i = 0; i < array.length; i++) {
-        if (array[i].left > (start.left + container[1] - array[i].width)) {
-            //옆 오른쪽으로 나가면 잘라냄
+        console.log("in array",array);
+        if (array[i].right > (start.left + container[1])) {
+            //옆 오른쪽으로 붙거나 나가면 잘라냄
             array.splice(i, 1);
-        }else if (array[i].left < start.left) {
+        } else if (array[i].left < start.left) {
             //옆 왼쪽으로 나가면 잘라냄
             array.splice(i, 1);
-        } else {
-            for (var i = 0; i < array.length; i++) {
-                if (array[i].top > (start.top + container[0] - array[i].height)) {
-                    //아래로 나가면 잘라냄
-                    array.splice(i, 1);
-                }else if (array[i].top < start.top) {
-                    //위로 나가면 잘라냄
-                    array.splice(i, 1);
-                }
-            }
+        } else if (array[i].bottom > (start.top + container[0])) {
+            //아래로 붙거나 나가면 잘라냄
+            array.splice(i, 1);
+        } else if (array[i].top < start.top) {
+            //위로 나가면 잘라냄
+            array.splice(i, 1);
         }
+        console.log("out array",array);
     }
-
-
-
 }
+
 
 //콤마
 function numberWithCommas(x) {
