@@ -365,7 +365,7 @@ function boxincontainer(new_box, idx, dan) {
 function box_list_init() {
     $('#boxlist').empty(); //박스리스트 초기화
     var all_CBM = 0;
-    
+
     for (var i = 0; i < box.length; i++) {
         var dansu = '<span class="badge"> ' + box[i][9] + '단</span>';
         var box_name = "";
@@ -384,6 +384,8 @@ function box_list_init() {
         var CBM = (box[i][1] * 0.01) * (box[i][2] * 0.01) * (box[i][3] * 0.01) * box[i][4];
         CBM = Math.floor(CBM * 100) / 100;
         all_CBM = all_CBM + CBM;
+        all_CBM = Math.floor(all_CBM * 100) / 100;
+
         var append = '<li class="ui-state-default" style="border-color:rgb(' + box[i][1] + ',' + box[i][2] + ',' + box[i][3] + ');" value="' + box[i] + '">' +
             box_name + '<strong>' + box[i][1] + '*' + box[i][2] + '*' + box[i][3] + '</strong>' + box[i][4] + '개 ' +
             //그룹
@@ -404,8 +406,8 @@ function box_list_init() {
             '</li>';
         $('#boxlist').append(append);
     }
-    $('.all_cbm').html('총 '+all_CBM+' CBM');
-    console.log("all_CBM",all_CBM);
+    $('.all_cbm').html('총 ' + all_CBM + ' CBM');
+    console.log("all_CBM", all_CBM);
     all_init();
 }
 //박스 삭제
@@ -604,7 +606,7 @@ function get_boxs_heigth() {
     console.log("너비 큰순 정렬", box_position_width);
 
     //밖으로 나간거 제외
-    array_out(box_position_width,start);
+    array_out(box_position_width, start);
 
     //높이 큰순으로 정렬
     var length = box_position_height.length;
@@ -622,7 +624,7 @@ function get_boxs_heigth() {
     console.log("높이 큰순 정렬", box_position_height);
 
     //밖으로 나간거 제외
-    array_out(box_position_height,start);
+    array_out(box_position_height, start);
 
     //가장 높은 고 구하기 [6]*높이
     var box_height = [];
@@ -640,43 +642,50 @@ function get_boxs_heigth() {
             }
         }
     }
-  
+
     //너비 높이는 가장 먼 박스 - 가장 가까운 박스 + 박스 너비or높이 +2(보더 너비)
-    full_width = box_position_width[0].left - box_position_width[box_position_width.length -1].left + box_position_width[0].width + 2;
+    full_width = box_position_width[0].left - box_position_width[box_position_width.length - 1].left + box_position_width[0].width + 2;
     //소수점 반올림
     full_width = Math.floor(full_width * 100) / 100;
-    
-    full_height = box_position_height[0].top - box_position_height[box_position_height.length -1].top + box_position_height[0].height + 2;
+
+    full_height = box_position_height[0].top - box_position_height[box_position_height.length - 1].top + box_position_height[0].height + 2;
     full_height = Math.floor(full_height * 100) / 100;
 
-    
+
     console.log("box_position", box_position);
     console.log("full", full_height, full_width, box_height[0]);
 
 
-    $('.full_box').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0]);
+    $('.full_box').html(" 박스 너비 " + full_height + ' * ' + full_width + ' * ' + box_height[0] + ' = ' + numberWithCommas((full_height * full_width * box_height[0])/100)+"㎥");
 
 }
 //밖으로 나가는 배열 제거
-function array_out(array,start){
+function array_out(array, start) {
     for (var i = 0; i < array.length; i++) {
         if (array[i].left > (start.left + container[1] - array[i].width)) {
+            //옆 오른쪽으로 나가면 잘라냄
             array.splice(i, 1);
-        }
-        if (array[i].left < start.left) {
+        }else if (array[i].left < start.left) {
+            //옆 왼쪽으로 나가면 잘라냄
             array.splice(i, 1);
+        } else {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].top > (start.top + container[0] - array[i].height)) {
+                    //아래로 나가면 잘라냄
+                    array.splice(i, 1);
+                }else if (array[i].top < start.top) {
+                    //위로 나가면 잘라냄
+                    array.splice(i, 1);
+                }
+            }
         }
     }
-    for (var i = 0; i < array.length; i++) {
-        if (array[i].top > (start.top + container[0] - array[i].height)) {
-            array.splice(i, 1);
-        }
-        if (array[i].top < start.top) {
-            array.splice(i, 1);
-        }
-    }
-    
-    
+
+
+
 }
 
-
+//콤마
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
