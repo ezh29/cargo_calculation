@@ -205,6 +205,8 @@ function tooltip_start() {
         container: '#container_area',
 
     });
+
+    //컨테이너 밖으로 나가면 툴팁 닫음
     $('#container_area')
         .on('mouseleave focusout', function () {
             $('.box_info').tooltip('hide');
@@ -329,6 +331,7 @@ function boxincontainer_init() {
 }
 //박스 넣기 
 function boxincontainer(new_box, idx, dan) {
+    //툴팁 가로세로 장폭고 버튼 -> 박스 리스트의 가로세로버튼 트리거
     var garosero_btn = "<span class='glyphicon glyphicon-resize-horizontal change_size' onclick='tooltip_triger_ho_btn(" + idx + ");' box_idx='" + idx + "'></span><span class='glyphicon glyphicon-resize-vertical change_size' onclick='tooltip_triger_ver_btn(" + idx + ");' box_idx='" + idx + "'></span><br/>";
     //박스명 체크
     var box_name_in_box = "";
@@ -350,7 +353,8 @@ function boxincontainer(new_box, idx, dan) {
         tooltip_dan = '<br/>최대단수 ' + new_box[9] + '단';
     }
 
-    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + new_box[1] + ',' + new_box[2] + ',' + new_box[3] + ');' + in_css + '" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] - 2) + 'px; height:' + (new_box[1] - 2) + 'px;">' +
+    var bg_color = new_box[1] + ',' + new_box[2] + ',' + new_box[3];
+    var box_html = '<div class="box" style="width:' + new_box[2] + 'px; height:' + new_box[1] + 'px; background:rgb(' + bg_color + ');' + in_css + '" box_idx="' + idx + '"><div class="box_inner" style="width:' + (new_box[2] - 2) + 'px; height:' + (new_box[1] - 2) + 'px;">' +
         //박스 정보
         '<span  class="box_info"' +
         //툴팁
@@ -523,8 +527,8 @@ function all_delet_boxlist_btn() {
 
 //박스 장폭 변경
 function ch_garo_btn(i) {
+    $('.box_info').tooltip('hide');
     var target_box = $('.box[box_idx="' + i + '"]');
-
     //i번쨰 배열의 장폭 변경
     var d = "";
     console.log("box[i][1]", box[i][1]);
@@ -536,8 +540,8 @@ function ch_garo_btn(i) {
 };
 //폭고 토글
 function ch_sero_btn(i) {
+    $('.box_info').tooltip('hide');
     var target_box = $('.box[box_idx="' + i + '"]');
-
     //i번쨰 배열의 폭고 변경
     var d = "";
     console.log("box[i][2]", box[i][2]);
@@ -577,14 +581,14 @@ function ch_down_btn(i) {
 function get_boxs_heigth() {
     var box_position = [];
     var start = $('#container').position();
-    console.log("start ", start, "bottom",(start.top + container[0]), "right",(start.left + container[0]));
+    console.log("start ", start, "bottom", (start.top + container[0]), "right", (start.left + container[0]));
     //자식들 복사
     var boxs = $('#container').children();
     for (var i = 0; i < boxs.length; i++) {
         //자식 위치와 높이 너비 객체배열화
         box_position[i] = boxs.eq(i).position();
         box_position[i].height = boxs.eq(i).height() + 2;
-        box_position[i].width = boxs.eq(i).width()+ 2;
+        box_position[i].width = boxs.eq(i).width() + 2;
         box_position[i].bottom = box_position[i].top + box_position[i].height;
         box_position[i].right = box_position[i].left + box_position[i].width;
 
@@ -671,23 +675,25 @@ function get_boxs_heigth() {
 //밖으로 나가는 배열 제거
 function array_out(array, start) {
 
+    for (var j = 0; j < array.length; j++) {
 
-    for (var i = 0; i < array.length; i++) {
-        console.log("in array",array);
-        if (array[i].right > (start.left + container[1])) {
-            //옆 오른쪽으로 붙거나 나가면 잘라냄
-            array.splice(i, 1);
-        } else if (array[i].left < start.left) {
-            //옆 왼쪽으로 나가면 잘라냄
-            array.splice(i, 1);
-        } else if (array[i].bottom > (start.top + container[0])) {
-            //아래로 붙거나 나가면 잘라냄
-            array.splice(i, 1);
-        } else if (array[i].top < start.top) {
-            //위로 나가면 잘라냄
-            array.splice(i, 1);
+        for (var i = 0; i < array.length; i++) {
+            //console.log("in array", array);
+            if (array[i].right > (start.left + container[1])) {
+                //옆 오른쪽으로 붙거나 나가면 잘라냄
+                array.splice(i, 1);
+            } else if (array[i].left < start.left) {
+                //옆 왼쪽으로 나가면 잘라냄
+                array.splice(i, 1);
+            } else if (array[i].bottom > (start.top + container[0])) {
+                //아래로 붙거나 나가면 잘라냄
+                array.splice(i, 1);
+            } else if (array[i].top < start.top) {
+                //위로 나가면 잘라냄
+                array.splice(i, 1);
+            }
+            //console.log("out array", array);
         }
-        console.log("out array",array);
     }
 }
 
