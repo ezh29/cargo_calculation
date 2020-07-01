@@ -19,7 +19,7 @@ input[type=checkbox], input[type=radio] {margin: 0;}
 
 /*입력 박스*/
 #input_area {width: 500px;float: left; padding: 0 20px}
-#container_area_wrap {margin-left: 480px; }
+#container_area_wrap {margin-left: 500px; }
 label span {width: 64px;display: inline-block;}
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
