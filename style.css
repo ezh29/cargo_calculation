@@ -13,12 +13,22 @@ input[type='text'], input[type='tel'] {height: 25px !important;width: 66px !impo
 input::placeholder {font-size: 12px; !important;}
 button {font-size: 12px !important; padding: 5px !important;}
 input[type=checkbox], input[type=radio] {margin: 0;}
+.badge {cursor: default !important; background: #414344;}
+
+/*패널 색 커스텀*/
+.panel_GS_red {border-color: #C70F0A;}
+.panel_GS_red>.panel-heading {color: #fff;background-color: #C70F0A;border-color: #C70F0A;}
+.panel_GS_gray {border-color: #414344;}
+.panel_GS_gray>.panel-heading {color: #fff;background-color: #414344;border-color: #414344;}
+
 /*박스 겹침시 경고 레드*/
 .bg_red {background: red !important;padding: 3px !important;}
-.badge {cursor: default !important;}
+
+nav { width: 50px;height: 100vh;background: #333;float: left;position: fixed; }
+.content {margin-left: 50px; padding: 20px;}
 
 /*입력 박스*/
-#input_area {width: 500px;float: left; padding: 0 20px}
+#input_area {width: 500px;float: left; padding-right: 10px;}
 #container_area_wrap {margin-left: 500px; }
 label span {width: 64px;display: inline-block;}
 /*컨테이너 박스*/
@@ -31,6 +41,12 @@ border-radius: 5px;font-size: 12px;cursor: move;}
 /*박스 정보*/
 .box_info {cursor: pointer; line-height: 1; width: 90%;word-break:break-all;}
 
+/*박스리스트 안내*/
+.box_list_panel .panel-heading .badge {float: right;margin-top: -2px;margin-right: 6px;}
+.box_list_panel .panel-heading .badge:nth-of-type(1) {margin-right: 0px;}
+.boxlist_info{position: relative;}
+.boxlist_info p {text-align: center;font-size: 12px; padding: 10px;margin-right: 50px;}
+.boxlist_info .glyphicon-trash {cursor: pointer;padding: 17px;background: #fafafa;font-size: 16px;color: #82949a;border-radius: 50%;position: absolute;right: 0;}
 /*박스리스트*/
  #boxlist {list-style-type: none;padding: 0;width: 100%;}
 #boxlist li {background-color: #fafafa;color: #82949a;margin-bottom: 7px;padding: 10px;border-left: 5px solid #82949a; cursor: move;}
