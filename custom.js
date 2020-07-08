@@ -355,6 +355,8 @@ function boxincontainer_init() {
     }
     //박스 리스트 초기화
     box_list_init();
+        get_boxs_heigth();
+
 }
 //박스 넣기 
 function boxincontainer(new_box, idx, dan) {
@@ -389,7 +391,6 @@ function boxincontainer(new_box, idx, dan) {
         box_name_in_box + new_box[1] + ' * ' + new_box[2] + ' * ' + new_box[3] + '<br/>' + dan + '단<span></div></div>';
     $('#container').append(box_html);
     all_init();
-    get_boxs_heigth();
 }
 
 //박스 리스트 가져오기
