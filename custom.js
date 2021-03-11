@@ -50,6 +50,7 @@ $("input:radio[name=container_size]").click(function () {
     //위의 값 A~E 모두 아닐때 실행할 명령문;
   }
   chk_boxs();
+  calc_price();
 });
 
 //기본 클릭값
@@ -1083,17 +1084,35 @@ function calc_price() {
   var price_weigth_basic = price_weigth + basic_price;
   var price_CBM_basic = price_CBM + basic_price;
   //1.2배 체크
-  //길이 6m이상 or 무게 10000이상 or CBM 25이상 일때 => 전부 1.2배
-  if (calc_length >= 600 || calc_weight >= 10000 || calc_CBM >= 25) {
-    price_length_basic = price_length_basic * 1.2;
-    price_weigth_basic = price_weigth_basic * 1.2;
-    price_CBM_basic = price_CBM_basic * 1.2;
 
-    //천의 자리 올림
-    price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
-    price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
-    price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
+  //차종별 할증
+  radioVal = $('input[name="container_size"]:checked').val();
+  if (radioVal == "11톤") {
+    //길이 6m이상 or 무게 10000이상 or CBM 25이상 일때 => 전부 1.2배
+    if (calc_length >= 600 || calc_weight >= 10000 || calc_CBM >= 25) {
+      price_length_basic = price_length_basic * 1.2;
+      price_weigth_basic = price_weigth_basic * 1.2;
+      price_CBM_basic = price_CBM_basic * 1.2;
+    }
+  } else if (radioVal == "5톤") {
+    //길이 2.5m이상 or 무게 2500이상 or CBM 12이상 일때 => 전부 1.2배
+    if (calc_length >= 250 || calc_weight >= 2500 || calc_CBM >= 12) {
+      price_length_basic = price_length_basic * 1.2;
+      price_weigth_basic = price_weigth_basic * 1.2;
+      price_CBM_basic = price_CBM_basic * 1.2;
+    }
+  } else {
+    if (calc_length >= 600 || calc_weight >= 10000 || calc_CBM >= 25) {
+      price_length_basic = price_length_basic * 1.2;
+      price_weigth_basic = price_weigth_basic * 1.2;
+      price_CBM_basic = price_CBM_basic * 1.2;
+    }
   }
+
+  //천의 자리 올림
+  price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+  price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
+  price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
 
   //길이
   $("#calc_length").html(numberWithCommas(calc_length));
