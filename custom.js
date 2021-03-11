@@ -28,11 +28,17 @@ var old_radioVal = $('input[name="container_size"]:checked').val();
 $("input:radio[name=container_size]").click(function () {
   radioVal = $('input[name="container_size"]:checked').val();
   switch (radioVal) {
-    case "1톤": //1톤 트럭 260*160*160
-      container_set = [260, 160, 160];
+    case "1톤": //1톤 트럭 280*160*160
+      container_set = [280, 160, 160];
+      break;
+    case "1.4톤": //1.4톤 트럭 300*165*175
+      container_set = [300, 165, 175];
       break;
     case "2.5톤": //2.5톤 트럭 420*180*180
       container_set = [420, 180, 180];
+      break;
+    case "3.5톤": //3.5톤 트럭 460*200*200
+      container_set = [460, 200, 200];
       break;
     case "5톤": //5톤 트럭 620*230*230
       container_set = [620, 230, 230];
