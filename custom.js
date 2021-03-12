@@ -1099,6 +1099,11 @@ function calc_price() {
       price_length_basic = price_length_basic * 1.2;
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
+
+       //1.2배시 천의 자리 올림
+       price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+      price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
+      price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
   } else if (radioVal == "5톤") {
     //길이 2.5m이상 or 무게 2500이상 or CBM 12이상 일때 => 전부 1.2배
@@ -1106,19 +1111,26 @@ function calc_price() {
       price_length_basic = price_length_basic * 1.2;
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
+
+       //1.2배시 천의 자리 올림
+       price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+      price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
+      price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
   } else {
     if (calc_length >= 600 || calc_weight >= 10000 || calc_CBM >= 25) {
       price_length_basic = price_length_basic * 1.2;
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
+
+       //1.2배시 천의 자리 올림
+      price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+      price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
+      price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
   }
 
-  //천의 자리 올림
-  price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
-  price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
-  price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
+ 
 
   //길이
   $("#calc_length").html(numberWithCommas(calc_length));
