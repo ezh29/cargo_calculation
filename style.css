@@ -6,7 +6,7 @@ body{font-size: 12px;}
 .radio {  margin-top: 0px;     margin-bottom: 0px;}
 .form-group {margin-bottom: 0 !important;}
 .form-inline {display: inline-block; width:100%; margin-bottom: 10px;}
-input[type='text'], input[type='tel'] {height: 25px !important;width: 66px !important}
+input[type='text'], input[type='tel'] {height: 25px !important;width: 50px !important}
 input::placeholder {font-size: 12px; !important;}
 button {font-size: 12px !important; padding: 5px !important;}
 input[type=checkbox], input[type=radio] {margin: 0;}
@@ -26,12 +26,13 @@ input[type=checkbox], input[type=radio] {margin: 0;}
 /*박스 겹침시 경고 레드*/
 .bg_red {background: red !important;padding: 3px !important;}
 
-nav { width: 120px;height: 100vh;background: #333;float: left;position: fixed; }
-.content {margin-left: 50px; padding: 20px; position: relative;}
+/* nav { width: 120px;height: 100vh;background: #333;float: left;position: fixed; } */
+.content {padding: 20px;}
 
 /*입력 박스*/
-#input_area {width: 470px;float: left; padding-right: 10px;}
-#container_area_wrap {margin-left: 470px; }
+#input_area {width: 450px;float: left; padding-right: 10px;}
+#input_area2 {width: 450px;float: left; padding-right: 10px;}
+#container_area_wrap {margin-left: 900px; }
 label span {width: 64px;display: inline-block;}
 /*컨테이너 박스*/
 #container {background-color: #ddd;display: flex;flex-wrap: wrap;align-content: flex-start;border-radius: 5px;}
