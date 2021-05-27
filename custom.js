@@ -1100,8 +1100,8 @@ function calc_price() {
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
 
-       //1.2배시 천의 자리 올림
-       price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+      //1.2배시 천의 자리 올림
+      price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
       price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
       price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
@@ -1112,8 +1112,8 @@ function calc_price() {
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
 
-       //1.2배시 천의 자리 올림
-       price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
+      //1.2배시 천의 자리 올림
+      price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
       price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
       price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
@@ -1123,14 +1123,12 @@ function calc_price() {
       price_weigth_basic = price_weigth_basic * 1.2;
       price_CBM_basic = price_CBM_basic * 1.2;
 
-       //1.2배시 천의 자리 올림
+      //1.2배시 천의 자리 올림
       price_length_basic = Math.ceil(price_length_basic / 10000) * 10000;
       price_weigth_basic = Math.ceil(price_weigth_basic / 10000) * 10000;
       price_CBM_basic = Math.ceil(price_CBM_basic / 10000) * 10000;
     }
   }
-
- 
 
   //길이
   $("#calc_length").html(numberWithCommas(calc_length));
@@ -1141,22 +1139,27 @@ function calc_price() {
   $("#price_CBM").html(numberWithCommas(price_CBM));
   //용달가격
   $("#truck_price").html(numberWithCommas(all_truck_price));
+  // //총운임
+  // $("#price_length_result").html(
+  //   numberWithCommas(price_length_basic) +
+  //     "<br/> + " +
+  //     numberWithCommas(all_truck_price)
+  // );
+  // $("#price_weigth_result").html(
+  //   numberWithCommas(price_weigth_basic) +
+  //     "<br/> + " +
+  //     numberWithCommas(all_truck_price)
+  // );
+  // $("#price_CBM_result").html(
+  //   numberWithCommas(price_CBM_basic) +
+  //     "<br/> + " +
+  //     numberWithCommas(all_truck_price)
+  // );
+  //용달 가격 제거 20210527
   //총운임
-  $("#price_length_result").html(
-    numberWithCommas(price_length_basic) +
-      "<br/> + " +
-      numberWithCommas(all_truck_price)
-  );
-  $("#price_weigth_result").html(
-    numberWithCommas(price_weigth_basic) +
-      "<br/> + " +
-      numberWithCommas(all_truck_price)
-  );
-  $("#price_CBM_result").html(
-    numberWithCommas(price_CBM_basic) +
-      "<br/> + " +
-      numberWithCommas(all_truck_price)
-  );
+  $("#price_length_result").html(numberWithCommas(price_length_basic));
+  $("#price_weigth_result").html(numberWithCommas(price_weigth_basic));
+  $("#price_CBM_result").html(numberWithCommas(price_CBM_basic));
 }
 
 //용달비 체크 클릭시 체크박스 값 배열로 저장
