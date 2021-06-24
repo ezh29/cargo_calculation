@@ -29,7 +29,7 @@ $("input:radio[name=container_size]").click(function () {
   radioVal = $('input[name="container_size"]:checked').val();
   switch (radioVal) {
     case "1톤": //1톤 트럭 280*160*160
-      container_set = [280, 160, 160];
+      container_set = [260, 160, 160];
       break;
     case "1.4톤": //1.4톤 트럭 300*165*175
       container_set = [300, 165, 175];
